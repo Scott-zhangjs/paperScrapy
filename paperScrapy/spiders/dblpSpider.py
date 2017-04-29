@@ -8,9 +8,15 @@ from paperScrapy.mysqlpool import MysqlPool
 from paperScrapy.items import PaperscrapyItem
 
 
-class DblpspiderSpider(scrapy.Spider):
+class CCFDblpSpider(scrapy.Spider):
 
-    name = "dblpSpider"
+    name = "ccfdblpSpider"
+
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'paperScrapy.pipelines.CCFDblpPipeline': 1,
+        }
+    }
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36',
@@ -82,12 +88,12 @@ class DblpspiderSpider(scrapy.Spider):
             venue_url = response.xpath('//div[@id="completesearch-venues"]/div/ul/li/a/@href').extract()
             href_num = len(venue_url)
 
-            matches_type = response.xpath('//*[@id="completesearch-venues"]/div/p[1]/text()').extract()[0]
+            matches_type = response.xpath('//*[@id="completesearch-venues"]/div/p[1]/text()').extract()
 
             if href_num == 0:
                 raise Exception("Not matches venue!")
 
-            if matches_type != 'Exact matches':
+            if matches_type[0] != 'Exact matches':
                 if href_num > 1:
                     raise Exception("Too many matches venue!")
         except Exception, e:        # 匹配到多个或者没匹配到
