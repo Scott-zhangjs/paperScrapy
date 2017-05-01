@@ -31,12 +31,19 @@ MYSQL_PASSWD = '123456'             # 数据库密码，请修改
 MYSQL_PORT = 3306                   # 数据库端口，在dbhelper中使用
 
 
+# # 配置代理
+# DOWNLOADER_MIDDLEWARES = {
+#  'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
+#  'paperScrapy.middlewares.ProxyMiddleware': 100,
+# }
+
+
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'paperScrapy.pipelines.PaperscrapyPipeline': 300,         # 保存到mysql数据库
-    # 'paperScrapy.pipelines.JsonWithEncodingPipeline': 300,    # 保存到文件中
-}
+# ITEM_PIPELINES = {
+#     'paperScrapy.pipelines.PaperscrapyPipeline': 300,         # 保存到mysql数据库
+#     # 'paperScrapy.pipelines.JsonWithEncodingPipeline': 300,    # 保存到文件中
+# }
 
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)

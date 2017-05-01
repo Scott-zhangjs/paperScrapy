@@ -4,8 +4,56 @@
 #
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
+import os
 
+import time
 from scrapy import signals
+
+# Importing base64 library because we'll need it ONLY in case if the proxy we are going to use requires authentication
+import base64
+import random
+
+
+# Start your middleware class
+class ProxyMiddleware(object):
+    # overwrite process request
+    def process_request(self, request, spider):
+
+        '''对request对象加上proxy'''
+        proxy = self.get_random_proxy()
+        print "this is request ip:" + proxy
+        request.meta['proxy'] = proxy
+
+
+    def process_response(self, request, response, spider):
+        '''对返回的response处理'''
+        # 如果返回的response状态不是200，重新生成当前request对象
+        if response.status != 200:
+            proxy = self.get_random_proxy()
+            print("this is response ip:" + proxy)
+            # 对当前reque加上代理
+            request.meta['proxy'] = proxy
+            return request
+        return response
+
+
+    def get_random_proxy(self):
+        '''随机从文件中读取proxy'''
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        dir = os.path.join(BASE_DIR, 'tools/proxies.txt')
+        # print 'dir', dir
+        proxyFile = open(dir)
+
+        proxies = []
+
+        for line in proxyFile:
+            tmp = line.split(':')
+            if tmp[0] == 'http':        # 专门挑选http，由于链接是http的
+                proxies.append(str(line).replace("\n", ""))
+
+        proxy = random.choice(proxies).strip()
+        return proxy
+
 
 
 class PaperscrapySpiderMiddleware(object):

@@ -11,7 +11,6 @@ import scrapy
 class PaperscrapyItem(scrapy.Item):
     # define the fields for your item here like:
 
-    name = scrapy.Field()   # dblp_name
-    # name1 = scrapy.Field()   # dblp_name1
-    # name2 = scrapy.Field()   # dblp_name2
+    name = scrapy.Field()       # dblp_name
     venue_id = scrapy.Field()     # venue_id
+    venue_type = scrapy.Field()     # 记录venue属于哪一个数据表如 ccf, core
