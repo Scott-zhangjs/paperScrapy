@@ -35,16 +35,16 @@ ROBOTSTXT_OBEY = False
 
 # 下载延迟反被封锁ip
 # CONCURRENT_REQUESTS = 0.5
-DOWNLOAD_DELAY = 5
+DOWNLOAD_DELAY = 3.1
 
 # 禁用cookies
-COOKIES_ENABLED = False
+COOKIES_ENABLED = True
 
-AUTOTHROTTLE_ENABLED = True
-AUTOTHROTTLE_START_DELAY = 1
+# AUTOTHROTTLE_ENABLED = True
+# AUTOTHROTTLE_START_DELAY = 1
 
 
-# # 配置代理
+# 配置代理
 # DOWNLOADER_MIDDLEWARES = {
 #  'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
 #  'paperScrapy.middlewares.ProxyMiddleware': 100,

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import random
 from time import sleep
 
 import scrapy
@@ -20,16 +21,29 @@ class GooglePaperSpider(scrapy.Spider):
     }
 
     headers = {
+        #
+        # 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        # 'Accept-Encoding': 'gzip, deflate, sdch, br',
+        # 'Accept-Language': 'zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4',
+        # 'Connection':'keep-alive',
+        # # 'Cookie': 'NID=101=kIp1iRvNwFTEwn3KxMxcNiN1u0tefKE88AAwv43RCRIq88DyjIUs7IBX-RMFT7JsGyS3MuojSSbK67M3G_vW8a7MM53pwebVFk5PWfTrid08rM57bHsKrezt8Xxd4Rf-; GSP=LM=1493962237:S=1xYoFQYMuCFUhMX1; Hm_lvt_0f47b9feac1b36431493d82d708e859a=1493962239; Hm_lpvt_0f47b9feac1b36431493d82d708e859a=1493962239',
+        # 'Host': 'xichuan.pub',
+        # 'Referer': 'https://xichuan.pub/scholar?hl=en&num=20&as_sdt=0%2C5',
+        # # 'Upgrade-Insecure-Requests': '1',
+        # 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
+
         'accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 		'Accept-Encoding':'gzip, deflate, sdch, br',
 		'Accept-Language':'zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4',
-		'Connection':'keep-alive',
-		'Host':'www.xichuan.pub',
-		'Referer':'https://www.xichuan.pub/scholar?hl=en&num=20&as_sdt=0',
-		'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
-		'Cache-Control':'max-age=0',
-		'Cookie':'NID=102=vSCx8CKPNblsOeXKlybGGdm4MhYUfkdoNLfIBOV3PuzbgvZCNxEZfSj2swR8w7jhjDOfet9zgY26safF1nWCkuEWYFAZiVEh9TDtecshhdYf653ZjrzluNGdcBMkmcXl; GSP=NW=1:LM=1493959378:S=25DU072NMo4Z3NWx',
+		# 'Connection':'keep-alive',
+		'Host':'kuaiguge.co',
+		'Referer':'https://kuaiguge.co/scholar?hl=en&num=20&as_sdt=0',
+		'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
+		'upgrade-insecure-requests': '1',
+		# 'Cookie':'NID=102=qzJh3hVBvnFjJ1yWhKpZzv5jLQ99_eozfFFqWZZK0CLNQ4uoVscAIJw8kH_DqoQIgmvUonjFowLqdoui79I4QkSLyiIHfaVWBDewT85WwnH3tlVjSyneSbJPfdfUvY2C; GSP=NW=1:LM=1493992992:S=1LQyPfQ2WAG1xKPw; _ga=GA1.2.656936550.1493992987; _gid=GA1.2.605575076.1493992994',
     }
+
+    cookie = []
 
     mypool = MysqlPool()  # 创建连接池
 
@@ -58,7 +72,7 @@ class GooglePaperSpider(scrapy.Spider):
             paper_publicationYear = self.ccf_paper_set[i]["paper_publicationYear"]
             paper_publicationYear = str(paper_publicationYear)
 
-            url = "https://www.xichuan.pub/"
+            url = "https://kuaiguge.co/"    # 'http://202.168.155.123/' # "https://www.xichuan.pub/"
             # weizhui = '&btnG=&as_sdt=1%2C5&as_sdtp=&as_ylo=%d&as_yhi=%d' %(paper_publicationYear, paper_publicationYear)
             urlTitle = url + "scholar?hl=en&q=" + str(paper_title.replace(":", "%3A") \
                         .replace("'", "%27").replace("&", "%26").replace("(", "%28") \
@@ -67,10 +81,15 @@ class GooglePaperSpider(scrapy.Spider):
                        + '&as_yhi=' + paper_publicationYear
 
             # 通过meta传递参数venue_id、venue_type，方便后续的数据库存取
+
+            # self.headers['Cookie'] = random.choice(self.cookie)
             yield Request(urlTitle, headers=self.headers,
                           meta={'paper_id': paper_id, 'paper_title': paper_title},
                           callback=self.parse_googlePaper)
-            # sleep(5)
+            if i%100 == 0:
+                sleep(random.uniform(8,10))
+                print '睡一会........................................'
+
         # paper_id = '1'
         # paper_title = "Technology for developing regions: Moore's law is not enough"
         # paper_title = "Smart packets: applying active networks to network management"

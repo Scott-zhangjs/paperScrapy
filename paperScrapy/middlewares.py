@@ -48,11 +48,10 @@ class ProxyMiddleware(object):
             proxy = self.get_random_proxy()
             print "this is request ip:" + proxy
             request.meta['proxy'] = proxy
-        self.count += 0
+        self.count += 1
         print 'count----------', self.count
-        if self.count == 50:
+        if self.count >= 10:
             self.count = 0
-
 
         # 这句话用于随机选择user-agent
         ua = random.choice(self.user_agent_list)
@@ -74,7 +73,18 @@ class ProxyMiddleware(object):
 
     def get_random_proxy(self):
         '''随机从文件中读取proxy'''
+
+
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        # dir = os.path.join(BASE_DIR, 'tools/httpsProxy.txt')
+        # proxyFile = open(dir)
+        # proxies = []
+        #
+        # for line in proxyFile:
+        #
+        #     proxies.append('https://' + str(line).replace("\n", ""))
+        #
+        #
         dir = os.path.join(BASE_DIR, 'tools/proxies.txt')
         # print 'dir', dir
         proxyFile = open(dir)
