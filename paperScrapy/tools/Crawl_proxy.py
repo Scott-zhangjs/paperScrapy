@@ -83,8 +83,8 @@ class Proxies(object):
             protocol = 'https' if 'https' in proxy else 'http'
             proxies = {protocol: proxy}
             try:
-                if requests.get('http://www.baidu.com', proxies=proxies, timeout=2).status_code == 200:
-                    print ('success %s' % proxy)
+                if requests.get('https://www.xichuan.pub/scholar', proxies=proxies, timeout=2).status_code == 200:
+                    print ('xichuan success %s' % proxy)
                     new_queue.put(proxy)
             except:
                 print ('fail %s' % proxy)
@@ -95,6 +95,6 @@ if __name__ == '__main__':
     a.verify_proxies()
     print (a.proxies)
     proxie = a.proxies
-    with open('proxies.txt', 'a') as f:
+    with open('proxies.txt', 'w') as f:
         for proxy in proxie:
             f.write(proxy + '\n')

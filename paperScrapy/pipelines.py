@@ -7,6 +7,41 @@
 
 from paperScrapy.tools.mysqlpool import MysqlPool
 
+class GooglePaperPipeline(object):
+    '''
+       保存到数据库中对应的class
+          1、在settings.py文件中配置
+          2、在自己实现的爬虫类中yield item,会自动执行
+       '''
+
+    dbpool = MysqlPool()
+
+    # pipeline默认调用
+    def process_item(self, item, spider):
+
+        paper_id = item['paper_id']
+        paper_nbCitation = item['paper_nbCitation']
+        paper_citationURL = item['paper_citationURL']
+        paper_rawURL = item['paper_rawURL']
+        paper_isseen = item['paper_isseen']
+        paper_pdfURL = item['paper_pdfURL']
+        paper_scholarInfo = item['paper_scholarInfo']
+        paper_rawInfo = item['paper_rawInfo']
+        paper_relatedURL = item['paper_relatedURL']
+
+        sql_update = "UPDATE paper SET paper_nbCitation = '%d'\
+        					, paper_isseen= '%d', paper_citationURL = '%s', paper_pdfURL = '%s'\
+        					, paper_rawURL= '%s', paper_scholarInfo = '%s', paper_rawInfo = '%s', paper_relatedURL = '%s'\
+        					WHERE paper_id='%d'" \
+                     % (paper_nbCitation, paper_isseen, paper_citationURL.replace('\'', '\\\'').strip(),
+                        paper_pdfURL.replace('\'', '\\\'').strip(), paper_rawURL.replace('\'', '\\\'').strip(),
+                        paper_scholarInfo.replace('\'', '\\\'').strip(), paper_rawInfo.replace('\'', '\\\'').strip(),
+                        paper_relatedURL.replace('\'', '\\\'').strip(), paper_id)
+
+        self.dbpool.update(sql_update)
+        self.dbpool.end()
+        print paper_id, ' is updated successful!'
+
 
 class DblpPipeline(object):
     '''
@@ -68,7 +103,7 @@ class DblpPipeline(object):
         :return: 
         """
 
-        dblp_name = item["name"]
+        dblp_name = item["name"].strip()    #清楚开头结尾处的空格
         venue_id = item["venue_id"]
 
         # 查询当前对应venue_id对应的dblp 名称

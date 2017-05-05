@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from time import sleep
 
 import scrapy
 from scrapy.http import Request
@@ -11,22 +12,27 @@ class DblpSpider(scrapy.Spider):
 
     name = "dblpSpider"
 
+    # 使用对应的pipline存储类
     custom_settings = {
         'ITEM_PIPELINES': {
             'paperScrapy.pipelines.DblpPipeline': 1,
         }
     }
 
+    # headers = {
+    #     'Host': 'dblp.uni-trier.de',
+    #     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+    #     'Accept': 'text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01',
+    #     'Accept-Language': 'zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4',
+    #     'Accept-Encoding': 'gzip, deflate, sdch',
+    #     'Referer': 'http://dblp.uni-trier.de/',
+    #     'Cookie': 'dblp-hideable-show-feeds=true; dblp-hideable-show-rawdata=true; dblp-view=y; dblp-search-mode=c',
+    #     'Connection': 'keep-alive',
+    #     'Cache-Control': 'max-age=0',
+    # }
+
     headers = {
-        'Host': 'dblp.uni-trier.de',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
-        'Accept': 'text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01',
-        'Accept-Language': 'zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4',
-        'Accept-Encoding': 'gzip, deflate, sdch',
-        'Referer': 'http://dblp.uni-trier.de/',
-        'Cookie': 'dblp-hideable-show-feeds=true; dblp-hideable-show-rawdata=true; dblp-view=y; dblp-search-mode=c',
-        'Connection': 'keep-alive',
-        'Cache-Control': 'max-age=0',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36',
     }
 
     mypool = MysqlPool()  # 创建连接池
@@ -59,30 +65,39 @@ class DblpSpider(scrapy.Spider):
         #     self.mypool.update(update_sql, (con_abb, con_id))
         # self.mypool.end()
         # print 'Conference is updated successful!'
+        #
 
-        for i in range(len(self.ccf_venue_set)):
 
-            # 从CCF集合中取出
-            venue_name = self.ccf_venue_set[i]["CCF_name"]
-            venue_id = self.ccf_venue_set[i]["CCF_id"]
-            url = 'http://dblp.uni-trier.de/search?q=' + venue_name
-
-            # 通过meta传递参数venue_id、venue_type，方便后续的数据库存取
-            venue_type = 'CCF'
-            yield Request(url, headers=self.headers,
-                          meta={'venue_id': venue_id, 'venue_type': venue_type}, callback=self.parse_venue)
-
-        # for i in range(len(self.core_venue_set)):
-        #     # 从Core集合中取出
-        #     venue_name = self.core_venue_set[i]["CORE_name"]
-        #     venue_id = self.core_venue_set[i]["CORE_id"]
-        #     url = 'http://dblp.uni-trier.de/search?q=' + venue_name
+        # for i in range(len(self.ccf_venue_set)):
+        #
+        #     # 从CCF集合中取出
+        #     venue_name = self.ccf_venue_set[i]["CCF_name"]
+        #     venue_id = self.ccf_venue_set[i]["CCF_id"]
+        #     line = venue_name.replace("%", "%25").replace(" ", "%20").replace(",", "%2C")\
+        #         .replace(":", "%3A").replace("?", "%3F").replace("&", "%26").replace("'", "%27")
+        #     url = 'http://dblp.uni-trier.de/search?q=' + line
         #
         #     # 通过meta传递参数venue_id、venue_type，方便后续的数据库存取
-        #     venue_type = 'CORE'
+        #     venue_type = 'CCF'
         #     yield Request(url, headers=self.headers,
-        #                   meta={'venue_id': venue_id, 'venue_type': venue_type}, callback=self.parse_venue)
+        #                   meta={'venue_id': venue_id, 'venue_type': venue_type},
+        #                   callback=self.parse_venue)
+        #     sleep(2)        #休眠
 
+        for i in range(len(self.core_venue_set)):
+            # 从Core集合中取出
+            venue_name = self.core_venue_set[i]["CORE_name"]
+            venue_id = self.core_venue_set[i]["CORE_id"]
+            line = venue_name.replace("%", "%25").replace(" ", "%20").replace(",", "%2C")\
+                .replace(":", "%3A").replace("?", "%3F").replace("&", "%26").replace("'", "%27")
+            url = 'http://dblp.uni-trier.de/search?q=' + line
+
+            # 通过meta传递参数venue_id、venue_type，方便后续的数据库存取
+            venue_type = 'CORE'
+            yield Request(url, headers=self.headers,
+                          meta={'venue_id': venue_id, 'venue_type': venue_type}, callback=self.parse_venue)
+        #
+        #     # sleep(2)        #休眠
     # 暂未使用
     def parse(self, response):
         item = PaperscrapyItem()    # 声明自己定义的item类
@@ -110,19 +125,22 @@ class DblpSpider(scrapy.Spider):
             href_num = len(venue_url)
 
             matches_type = response.xpath('//*[@id="completesearch-venues"]/div/p[1]/text()').extract()
-            # url多于两个，判定为连接过多
+
+            # print 'the type is ', matches_type[0], 'the num of venue', href_num
+
             paper_type = 'journal'
-            if href_num > 2:
+            if href_num > 2:    # url多于两个，判定为连接过多
                 raise Exception("Too many matches venue!")
             elif href_num == 2:     # 两个链接中去带有journals
                 # 首先判断匹配类型
-                if matches_type != 'Exact matches':
+                if matches_type[0] != 'Exact matches':
                     raise Exception("Too many matches venue!")
 
                 if paper_type not in venue_url[0] and paper_type not in venue_url[1]:
                     raise Exception("Not matches venue!")
-                if paper_type in venue_url[0] and paper_type in venue_url[1]:
-                    raise Exception("Too many matches venue!")
+                # 关于两个都journal的情况，是认为匹配过多还是都满足呢？
+                # if paper_type in venue_url[0] and paper_type in venue_url[1]:
+                #     raise Exception("Too many matches venue!")
                 # 把带有journal的链接付给第一个url
                 if paper_type not in venue_url[0]:
                     venue_url[0] = venue_url[1]
@@ -138,6 +156,7 @@ class DblpSpider(scrapy.Spider):
 
             print 'venue_url', venue_url[0]
             # 对匹配到的venue继续请求
+            # sleep(1)  # 休眠
             yield Request(venue_url[0], headers=self.headers,
                           meta={'venue_id': venue_id, 'venue_type': venue_type}, callback=self.parse_volume)
 
@@ -158,7 +177,9 @@ class DblpSpider(scrapy.Spider):
             # 解析venue下的volume
             for vul in volume_ul:
                 tmp = vul.xpath('.//li/a[1]/@href').extract()
-                volume_url.append(tmp[0])
+                # print 'tmp------',tmp
+                if len(tmp) != 0:
+                    volume_url.append(tmp[0])
             href_num = len(volume_url)      # 匹配到链接的个数
             print 'parse_volume: ', href_num
             if href_num == 0:
@@ -171,6 +192,7 @@ class DblpSpider(scrapy.Spider):
             # 对匹配到前3个url进行请求
             tmp = (href_num if href_num<3 else 3)   # 在href_num 和 3 中找到较小数
             for i in range(tmp):
+                # sleep(1)  # 休眠
                 yield Request(volume_url[i], headers=self.headers,
                               meta={'venue_id': venue_id, 'venue_type': venue_type}, callback=self.parse_paper)
 
@@ -196,6 +218,7 @@ class DblpSpider(scrapy.Spider):
         else:
             # print 'paper_url', paper_url[1]
             # 对匹配到一篇论文请求
+            # sleep(1)  # 休眠
             yield Request(paper_url[1], headers=self.headers,
                           meta={'venue_id': venue_id, 'venue_type': venue_type}, callback=self.parse_paper_url)
 
@@ -213,7 +236,7 @@ class DblpSpider(scrapy.Spider):
             venue_type = response.meta['venue_type']  # 从meta取出变量venue_type
             print 'parse_paper_url: venue_id', venue_id
             # 找到匹配到的href
-            dblp_name = response.xpath('//ul[@class="publ-list"]/li/div[@class="data"]/a/span[1]/span//text()').extract()
+            dblp_name = response.xpath('//ul[@class="publ-list"]/li/div[@class="data"]/a/span[1]/span/text()').extract()
             dblp_num = len(dblp_name)
             if dblp_num == 0:
                 raise Exception("Not matches paper!")
@@ -226,7 +249,7 @@ class DblpSpider(scrapy.Spider):
             # print 'dblp_name', dblp_name[0]
 
             paper_item = PaperscrapyItem()  # 声明自己定义的item类 并赋值
-            paper_item['name'] = dblp_name
+            paper_item['name'] = dblp_name[0]
             paper_item['venue_id'] = venue_id
             paper_item['venue_type'] = venue_type
             yield paper_item

@@ -30,6 +30,19 @@ MYSQL_PASSWD = '123456'             # 数据库密码，请修改
 
 MYSQL_PORT = 3306                   # 数据库端口，在dbhelper中使用
 
+# 爬虫出现Forbidden by robots.txt
+ROBOTSTXT_OBEY = False
+
+# 下载延迟反被封锁ip
+# CONCURRENT_REQUESTS = 0.5
+DOWNLOAD_DELAY = 5
+
+# 禁用cookies
+COOKIES_ENABLED = False
+
+AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_START_DELAY = 1
+
 
 # # 配置代理
 # DOWNLOADER_MIDDLEWARES = {
