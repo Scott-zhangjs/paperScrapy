@@ -28,7 +28,7 @@ class GooglePaperSpider(scrapy.Spider):
 		'Referer':'https://www.xichuan.pub/scholar?hl=en&num=20&as_sdt=0',
 		'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
 		'Cache-Control':'max-age=0',
-		'Cookie':'NID=102=awQhlL3Z31EUhIITs64J_uVTXLDBMKYQucIXiNRhSJk3rwXHhHTb2I4vxEAQJ5AIzCRWDRm42JUzBZs9PmGHk37tvmOJ5or7yGy94aO50L3rt1GGe4MvddhmYEh-pjx9; GSP=NW=1:LM=1493959378:S=25DU072NMo4Z3NWx',
+		'Cookie':'NID=102=vSCx8CKPNblsOeXKlybGGdm4MhYUfkdoNLfIBOV3PuzbgvZCNxEZfSj2swR8w7jhjDOfet9zgY26safF1nWCkuEWYFAZiVEh9TDtecshhdYf653ZjrzluNGdcBMkmcXl; GSP=NW=1:LM=1493959378:S=25DU072NMo4Z3NWx',
     }
 
     mypool = MysqlPool()  # 创建连接池
