@@ -222,9 +222,14 @@ class Proxies(object):
             proxies = {protocol: proxy}
             # print 'woyaokande-----', proxies
             try:
-                if requests.get('http://baidu.com', proxies=proxies, timeout=2).status_code == 200:
-                    # print ('success %s' % proxy)
-                    new_queue.put(proxy)
+                if protocol == 'http':
+                    if requests.get('http://baidu.com', proxies=proxies, timeout=2).status_code == 200:
+                        # print ('success %s' % proxy)
+                        new_queue.put(proxy)
+                else:
+                    if requests.get('https://baidu.com', proxies=proxies, timeout=2).status_code == 200:
+                        # print ('success %s' % proxy)
+                        new_queue.put(proxy)
             except:
                 # pass
                 print ('fail %s' % proxy)

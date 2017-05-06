@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5a7068d-a812-4972-97d6-f5b054fb4750" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/middlewares.py" afterPath="$PROJECT_DIR$/paperScrapy/middlewares.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/run.py" afterPath="$PROJECT_DIR$/paperScrapy/run.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/settings.py" afterPath="$PROJECT_DIR$/paperScrapy/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/spiders/googlePaperSpider.py" afterPath="$PROJECT_DIR$/paperScrapy/spiders/googlePaperSpider.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/tools/Crawl_proxy.py" afterPath="$PROJECT_DIR$/paperScrapy/tools/Crawl_proxy.py" />
     </list>
@@ -17,21 +14,21 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/paperScrapy$dbhelper.coverage" NAME="dbhelper Coverage Results" MODIFIED="1493177565619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy" />
-    <SUITE FILE_PATH="coverage/paperScrapy$Crawl_proxy.coverage" NAME="Crawl_proxy Coverage Results" MODIFIED="1494072630344" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy/tools" />
-    <SUITE FILE_PATH="coverage/paperScrapy$run.coverage" NAME="run Coverage Results" MODIFIED="1494078365332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy" />
+    <SUITE FILE_PATH="coverage/paperScrapy$Crawl_proxy.coverage" NAME="Crawl_proxy Coverage Results" MODIFIED="1494082503371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy/tools" />
+    <SUITE FILE_PATH="coverage/paperScrapy$run.coverage" NAME="run Coverage Results" MODIFIED="1494083954679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy" />
     <SUITE FILE_PATH="coverage/paperScrapy$mysqlpool.coverage" NAME="mysqlpool Coverage Results" MODIFIED="1493210799278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="googlePaperSpider.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="googlePaperSpider.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/googlePaperSpider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+            <state relative-caret-position="1824">
+              <caret line="96" column="33" lean-forward="false" selection-start-line="96" selection-start-column="33" selection-end-line="96" selection-end-column="33" />
               <folding>
                 <element signature="e#24#37#0" expanded="true" />
-                <marker date="1494078838574" expanded="true" signature="2286:2685" ph="SELECT paper... paper" />
+                <marker date="1494082309545" expanded="true" signature="2284:2683" ph="SELECT paper... paper" />
               </folding>
             </state>
           </provider>
@@ -47,22 +44,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Crawl_proxy.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Crawl_proxy.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/paperScrapy/tools/Crawl_proxy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="596">
-              <caret line="83" column="39" lean-forward="true" selection-start-line="83" selection-start-column="39" selection-end-line="83" selection-end-column="39" />
+            <state relative-caret-position="304">
+              <caret line="46" column="54" lean-forward="true" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
               <folding>
                 <element signature="e#23#38#0" expanded="true" />
-                <marker date="1494072629263" expanded="true" signature="9278:9310" ph="select proxi... proxies" />
-                <marker date="1494072629263" expanded="true" signature="9694:9776" ph="INSERT INTO proxies... " />
-                <marker date="1494072629263" expanded="true" signature="9705:9776" ph="insert into proxies... " />
-                <marker date="1494072629263" expanded="true" signature="9998:10030" ph="select proxi... proxies" />
-                <marker date="1494072629263" expanded="true" signature="10333:10365" ph="select proxi... proxies" />
-                <marker date="1494072629263" expanded="true" signature="10602:10645" ph="delete from " />
-                <marker date="1494072629263" expanded="true" signature="11690:11747" ph="select proxi... proxies" />
-                <marker date="1494072629263" expanded="true" signature="11690:11773" ph="select proxi... proxies" />
-                <marker date="1494072629263" expanded="true" signature="12148:12232" ph="select proxi... proxies" />
+                <marker date="1494082590673" expanded="true" signature="9556:9588" ph="select proxi... proxies" />
+                <marker date="1494082590673" expanded="true" signature="9972:10054" ph="INSERT INTO proxies... " />
+                <marker date="1494082590673" expanded="true" signature="9983:10054" ph="insert into proxies... " />
+                <marker date="1494082590673" expanded="true" signature="10276:10308" ph="select proxi... proxies" />
+                <marker date="1494082590673" expanded="true" signature="10611:10643" ph="select proxi... proxies" />
+                <marker date="1494082590673" expanded="true" signature="10880:10923" ph="delete from " />
+                <marker date="1494082590673" expanded="true" signature="11968:12025" ph="select proxi... proxies" />
+                <marker date="1494082590673" expanded="true" signature="11968:12051" ph="select proxi... proxies" />
+                <marker date="1494082590673" expanded="true" signature="12426:12510" ph="select proxi... proxies" />
               </folding>
             </state>
           </provider>
@@ -79,9 +76,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>xichuan success https</find>
-      <find>get_proxies_nn</find>
-      <find>https://49.69.82.199:808</find>
       <find>page</find>
       <find>su</find>
       <find>success https</find>
@@ -106,9 +100,12 @@
       <find>htmlre</find>
       <find>g.s</find>
       <find>202.</find>
-      <find>202.1</find>
       <find>get_insert</find>
       <find>成功</find>
+      <find>202.1</find>
+      <find>Change_Cookie</find>
+      <find>verify_proxies</find>
+      <find>get_inser</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -129,8 +126,8 @@
         <option value="$PROJECT_DIR$/paperScrapy/run.py" />
         <option value="$PROJECT_DIR$/paperScrapy/middlewares.py" />
         <option value="$PROJECT_DIR$/paperScrapy/settings.py" />
-        <option value="$PROJECT_DIR$/paperScrapy/tools/Crawl_proxy.py" />
         <option value="$PROJECT_DIR$/paperScrapy/spiders/googlePaperSpider.py" />
+        <option value="$PROJECT_DIR$/paperScrapy/tools/Crawl_proxy.py" />
       </list>
     </option>
   </component>
@@ -251,7 +248,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.run">
+  <component name="RunManager" selected="Python.Crawl_proxy">
     <configuration default="false" name="dbhelper" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -510,11 +507,11 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19568345" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34031415" sideWeight="0.5028777" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34554973" sideWeight="0.5028777" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35340315" sideWeight="0.4971223" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.36518323" sideWeight="0.4971223" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1018,14 +1015,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-114">
-          <caret line="39" column="20" lean-forward="false" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/paperScrapy/middlewares.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="736">
@@ -1036,32 +1025,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/tools/Crawl_proxy.py">
+    <entry file="file://$PROJECT_DIR$/paperScrapy/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="596">
-          <caret line="83" column="39" lean-forward="true" selection-start-line="83" selection-start-column="39" selection-end-line="83" selection-end-column="39" />
-          <folding>
-            <element signature="e#23#38#0" expanded="true" />
-            <marker date="1494072629263" expanded="true" signature="9278:9310" ph="select proxi... proxies" />
-            <marker date="1494072629263" expanded="true" signature="9694:9776" ph="INSERT INTO proxies... " />
-            <marker date="1494072629263" expanded="true" signature="9705:9776" ph="insert into proxies... " />
-            <marker date="1494072629263" expanded="true" signature="9998:10030" ph="select proxi... proxies" />
-            <marker date="1494072629263" expanded="true" signature="10333:10365" ph="select proxi... proxies" />
-            <marker date="1494072629263" expanded="true" signature="10602:10645" ph="delete from " />
-            <marker date="1494072629263" expanded="true" signature="11690:11747" ph="select proxi... proxies" />
-            <marker date="1494072629263" expanded="true" signature="11690:11773" ph="select proxi... proxies" />
-            <marker date="1494072629263" expanded="true" signature="12148:12232" ph="select proxi... proxies" />
-          </folding>
+        <state relative-caret-position="-114">
+          <caret line="39" column="20" lean-forward="false" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/googlePaperSpider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="46" column="5" lean-forward="true" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
+        <state relative-caret-position="1824">
+          <caret line="96" column="33" lean-forward="false" selection-start-line="96" selection-start-column="33" selection-end-line="96" selection-end-column="33" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
-            <marker date="1494078838574" expanded="true" signature="2286:2685" ph="SELECT paper... paper" />
+            <marker date="1494082309545" expanded="true" signature="2284:2683" ph="SELECT paper... paper" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/paperScrapy/tools/Crawl_proxy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="46" column="54" lean-forward="true" selection-start-line="46" selection-start-column="54" selection-end-line="46" selection-end-column="54" />
+          <folding>
+            <element signature="e#23#38#0" expanded="true" />
+            <marker date="1494082590673" expanded="true" signature="9556:9588" ph="select proxi... proxies" />
+            <marker date="1494082590673" expanded="true" signature="9972:10054" ph="INSERT INTO proxies... " />
+            <marker date="1494082590673" expanded="true" signature="9983:10054" ph="insert into proxies... " />
+            <marker date="1494082590673" expanded="true" signature="10276:10308" ph="select proxi... proxies" />
+            <marker date="1494082590673" expanded="true" signature="10611:10643" ph="select proxi... proxies" />
+            <marker date="1494082590673" expanded="true" signature="10880:10923" ph="delete from " />
+            <marker date="1494082590673" expanded="true" signature="11968:12025" ph="select proxi... proxies" />
+            <marker date="1494082590673" expanded="true" signature="11968:12051" ph="select proxi... proxies" />
+            <marker date="1494082590673" expanded="true" signature="12426:12510" ph="select proxi... proxies" />
           </folding>
         </state>
       </provider>
