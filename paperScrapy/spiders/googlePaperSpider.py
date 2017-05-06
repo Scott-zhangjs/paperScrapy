@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import random
+import requests
 from time import sleep
 
 import scrapy
@@ -7,6 +8,8 @@ from scrapy.http import Request
 
 from paperScrapy.items import GooglePaperItem
 from paperScrapy.tools.mysqlpool import MysqlPool
+from scrapy.http.cookies import CookieJar
+
 
 
 class GooglePaperSpider(scrapy.Spider):
@@ -35,15 +38,15 @@ class GooglePaperSpider(scrapy.Spider):
         'accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 		'Accept-Encoding':'gzip, deflate, sdch, br',
 		'Accept-Language':'zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4',
-		# 'Connection':'keep-alive',
-		'Host':'kuaiguge.co',
-		'Referer':'https://kuaiguge.co/scholar?hl=en&num=20&as_sdt=0',
+		'Connection':'keep-alive',
+		'Host':'202.168.155.123',
+		'Referer':'http://202.168.155.123/scholar?hl=en&num=20&as_sdt=0',
 		'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
 		'upgrade-insecure-requests': '1',
-		# 'Cookie':'NID=102=qzJh3hVBvnFjJ1yWhKpZzv5jLQ99_eozfFFqWZZK0CLNQ4uoVscAIJw8kH_DqoQIgmvUonjFowLqdoui79I4QkSLyiIHfaVWBDewT85WwnH3tlVjSyneSbJPfdfUvY2C; GSP=NW=1:LM=1493992992:S=1LQyPfQ2WAG1xKPw; _ga=GA1.2.656936550.1493992987; _gid=GA1.2.605575076.1493992994',
+		# 'Cookie':'NID=102=kSuLMTVuwiz-IbsNK51c-j-g6Zq7Th5kYaFeln-oXGyFTQunQt3dx4DwL1rvNaxW2xqMAvX6VgcSb3dIUR8DY6rmjS4QOxS4Pn8y3QdtikOrSn_tMAeHdPovK8hpqWWu; UM_distinctid=15bddf3c16678e-02cb51cc75d215-317d0258-c0000-15bddf3c1676bc; GZ=Z=1; GSP=NW=1:LM=1494077416:S=Rst0w5YWQMYIRMPk; CNZZDATA1253100982=558052600-1494074179-%7C1494074179',
     }
 
-    cookie = []
+    # cookie = []
 
     mypool = MysqlPool()  # 创建连接池
 
@@ -60,6 +63,7 @@ class GooglePaperSpider(scrapy.Spider):
     				and paper_nbCitation = -1"
 
     ccf_paper_set = mypool.getAll(ccf_sql_select, ("A", "Conference"))  # 记录所有待查询的venue集合
+    count = 0
 
     # 获取初始request
     def start_requests(self):
@@ -72,7 +76,7 @@ class GooglePaperSpider(scrapy.Spider):
             paper_publicationYear = self.ccf_paper_set[i]["paper_publicationYear"]
             paper_publicationYear = str(paper_publicationYear)
 
-            url = "https://kuaiguge.co/"    # 'http://202.168.155.123/' # "https://www.xichuan.pub/"
+            url = "http://202.168.155.123/"    # 'http://202.168.155.123/' # "https://www.xichuan.pub/"
             # weizhui = '&btnG=&as_sdt=1%2C5&as_sdtp=&as_ylo=%d&as_yhi=%d' %(paper_publicationYear, paper_publicationYear)
             urlTitle = url + "scholar?hl=en&q=" + str(paper_title.replace(":", "%3A") \
                         .replace("'", "%27").replace("&", "%26").replace("(", "%28") \
@@ -81,32 +85,39 @@ class GooglePaperSpider(scrapy.Spider):
                        + '&as_yhi=' + paper_publicationYear
 
             # 通过meta传递参数venue_id、venue_type，方便后续的数据库存取
-
-            # self.headers['Cookie'] = random.choice(self.cookie)
             yield Request(urlTitle, headers=self.headers,
                           meta={'paper_id': paper_id, 'paper_title': paper_title},
                           callback=self.parse_googlePaper)
-            if i%100 == 0:
-                sleep(random.uniform(8,10))
-                print '睡一会........................................'
 
-        # paper_id = '1'
-        # paper_title = "Technology for developing regions: Moore's law is not enough"
-        # paper_title = "Smart packets: applying active networks to network management"
-        # paper_publicationYear = '2000'
-        # url = "https://www.xichuan.pub/"
-        # # weizhui = '&btnG=&as_sdt=1%2C5&as_sdtp=&as_ylo=%d&as_yhi=%d' %(paper_publicationYear, paper_publicationYear)
-        # urlTitle = url + "scholar?hl=en&q=" + str(paper_title.replace(":", "%3A") \
-        #                                           .replace("'", "%27").replace("&", "%26").replace("(", "%28") \
-        #                                           .replace(")", "%29").replace("/", "%2F").replace(" ", "+")) \
-        #             + '&btnG=&as_sdtp=&as_ylo=' + paper_publicationYear \
-        #            + '&as_yhi=' + paper_publicationYear
-        #
-        # # 通过meta传递参数venue_id、venue_type，方便后续的数据库存取
-        # yield Request(urlTitle, headers=self.headers,
-        #               meta={'paper_id': paper_id, 'paper_title': paper_title},
-        #               callback=self.parse_googlePaper)
+            if i>0 and i%50 == 0:
+                print'睡一会.(～﹃～)~zZ'
+                sleep(random.uniform(10,15))
+                # Change_Cookie(self.headers)
 
+
+            # if self.count < len(self.ccf_paper_set):
+            #     # 从CCF集合中取出
+            #     paper_id = self.ccf_paper_set[self.count]["paper_id"]
+            #     paper_title = self.ccf_paper_set[self.count]["paper_title"]
+            #     paper_publicationYear = self.ccf_paper_set[self.count]["paper_publicationYear"]
+            #     paper_publicationYear = str(paper_publicationYear)
+            #
+            #     url = "http://g.sci-hub.cn/"  # 'http://202.168.155.123/' # "https://www.xichuan.pub/"
+            #     # weizhui = '&btnG=&as_sdt=1%2C5&as_sdtp=&as_ylo=%d&as_yhi=%d' %(paper_publicationYear, paper_publicationYear)
+            #     urlTitle = url + "scholar?hl=en&q=" + str(paper_title.replace(":", "%3A") \
+            #                                               .replace("'", "%27").replace("&", "%26").replace("(", "%28") \
+            #                                               .replace(")", "%29").replace("/", "%2F").replace(" ", "+")) \
+            #                + '+' + '&btnG=&as_sdtp=&as_ylo=' + paper_publicationYear \
+            #                + '&as_yhi=' + paper_publicationYear
+            #
+            #     # 通过meta传递参数venue_id、venue_type，方便后续的数据库存取
+            #     yield Request(urlTitle, headers=self.headers,
+            #                   meta={'paper_id': paper_id, 'paper_title': paper_title},
+            #                   callback=self.parse_googlePaper)
+            #
+            #     self.count += 1   # 移除查询过的
+            # else:
+            #     print '空集合,查询结束!'
 
     def parse_googlePaper(self, response):
         """
@@ -114,12 +125,20 @@ class GooglePaperSpider(scrapy.Spider):
         :param response: 
         :return: 
         """
+        self.count += 1 # 计数
+        print '成功的个数: ', self.count
+        if self.count == 1 or self.count % 10 == 0:
+            self.Change_Cookie(response)
+
         paper_id = response.meta['paper_id']  # 从meta取出变量paper_id
         paper_title = response.meta['paper_title']  # 从meta取出变量paper_id
         print 'parse_googlePaper: paper_id', paper_id
 
-        try:
+        # cookieJar = response.meta.setdefault('cookie_jar', CookieJar())
+        # print 'cookjar:', cookieJar
+        # cookieJar.extract_cookies(response, response.request)
 
+        try:
 
             # 获取当前的内容块
             cur_box = response.xpath('//*[@id="gs_ccl_results"]/div[1]')
@@ -213,6 +232,54 @@ class GooglePaperSpider(scrapy.Spider):
         #
         # yield item
 
+        # if self.count < len(self.ccf_paper_set):
+        #     # 从CCF集合中取出
+        #     paper_id = self.ccf_paper_set[self.count]["paper_id"]
+        #     paper_title = self.ccf_paper_set[self.count]["paper_title"]
+        #     paper_publicationYear = self.ccf_paper_set[self.count]["paper_publicationYear"]
+        #     paper_publicationYear = str(paper_publicationYear)
+        #
+        #     url = "http://g.sci-hub.cn/"  # 'http://202.168.155.123/' # "https://www.xichuan.pub/"
+        #     # weizhui = '&btnG=&as_sdt=1%2C5&as_sdtp=&as_ylo=%d&as_yhi=%d' %(paper_publicationYear, paper_publicationYear)
+        #     urlTitle = url + "scholar?hl=en&q=" + str(paper_title.replace(":", "%3A") \
+        #                                               .replace("'", "%27").replace("&", "%26").replace("(", "%28") \
+        #                                               .replace(")", "%29").replace("/", "%2F").replace(" ", "+")) \
+        #                + '+' + '&btnG=&as_sdtp=&as_ylo=' + paper_publicationYear \
+        #                + '&as_yhi=' + paper_publicationYear
+        #
+        #     # 通过meta传递参数venue_id、venue_type，方便后续的数据库存取
+        #     yield Request(urlTitle, headers=self.headers,
+        #                   meta={'paper_id': paper_id, 'paper_title': paper_title},
+        #                   callback=self.parse_googlePaper)
+        #
+        #     self.count += 1  # 移除查询过的
+        # else:
+        #     print '空集合,查询结束!'
+
+
+    def Change_Cookie(self, response):
+        # Referer_tmp =  headers['Referer']
+        # url = "http://g.sci-hub.cn/scholar"
+        # headers['User-Agent'] = generate_user_agent()
+        # headers['Referer'] = 'http://dir.scmor.com/google/'
+        try:
+            if response.status != 200:
+                raise Exception('当前未连接成功!')
+
+            # 更换Cookie，重置headers
+            cookie_list = response.headers.getlist('Set-Cookie') # 为cookie属性与值的字典
+            print 'cookie_dic--------->', cookie_list
+            try:
+                cookie_NID = cookie_list[0].split(';')
+                cookie = "NID=" + cookie_list['NID'] + "; GSP=" + cookie_dic['GSP']
+                self.headers['Cookie'] = cookie
+                print "CURRENT COOKIE: " + cookie
+                # headers['Referer'] = Referer_tmp #换回原来的Referer
+                # return cookie
+            except:
+                print "Change cookie FAILED!"
+        except Exception, e:
+            print e.args[0]
 
 
 

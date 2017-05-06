@@ -8,15 +8,19 @@ import os
 
 import time
 from scrapy import signals
+from scrapy.http.cookies import CookieJar
 
 # Importing base64 library because we'll need it ONLY in case if the proxy we are going to use requires authentication
 import base64
 import random
 
-
 # Start your middleware class
+from paperScrapy.tools.Crawl_proxy import Proxies
+
+
 class ProxyMiddleware(object):
 
+    cproxy = Proxies()
     # the default user_agent_list composes chrome,I E,firefox,Mozilla,opera,netscape
     user_agent_list = [ \
         "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1" \
@@ -45,13 +49,14 @@ class ProxyMiddleware(object):
 
         '''对request对象加上proxy'''
         if self.count == 0:
-            proxy = self.get_random_proxy()
+            # proxy = self.get_random_proxy()
+            proxy = self.cproxy.get_random_proxy_http()
             print "this is request ip:" + proxy
             request.meta['proxy'] = proxy
-        self.count += 1
-        print 'count----------', self.count
-        if self.count >= 10:
-            self.count = 0
+        # self.count += 1
+        # print 'count----------', self.count
+        # if self.count >= 5:
+        #     self.count = 0
 
         # 这句话用于随机选择user-agent
         ua = random.choice(self.user_agent_list)
@@ -63,18 +68,27 @@ class ProxyMiddleware(object):
         '''对返回的response处理'''
         # 如果返回的response状态不是200，重新生成当前request对象
         if response.status != 200:
-            proxy = self.get_random_proxy()
+            # proxy = self.get_random_proxy()
+            proxy = self.cproxy.get_random_proxy_http()
             print("this is response ip:" + proxy)
             # 对当前reque加上代理
             request.meta['proxy'] = proxy
             return request
+
+        # 处理cookies
+        # if request.meta.get('dont_merge_cookies', False):
+        #     return response
+        # # extract cookies from Set-Cookie and drop invalid/expired cookies
+        # cookieJar = response.meta.setdefault('cookie_jar', CookieJar())
+        # cookieJar.extract_cookies(response, response.request)
+        # cookies_test = cookieJar._cookies
+        # print "cookies - test:", cookies_test
         return response
+
 
 
     def get_random_proxy(self):
         '''随机从文件中读取proxy'''
-
-
         BASE_DIR = os.path.dirname(os.path.abspath(__file__))
         # dir = os.path.join(BASE_DIR, 'tools/httpsProxy.txt')
         # proxyFile = open(dir)
