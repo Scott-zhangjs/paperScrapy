@@ -120,9 +120,36 @@ class Proxies(object):
                     pro_list = tr[i].find_all('td')[3].get_text()
                     pro_list = pro_list.split(',')
                     for pro_tmp in pro_list:
-                        if 'http' in pro_tmp.lower():
-                            pro_tmp = pro_tmp.strip().lower() + '://'
-                            self.proxies.append(pro_tmp + ip_tmp + ':' + port_tmp)
+                        pro_tmp = pro_tmp.strip().lower() + '://'
+                        self.proxies.append(pro_tmp + ip_tmp + ':' + port_tmp)
+                        # print 'lianjie----------->', pro_tmp + ip_tmp + ':' + port_tmp
+            except:
+                print '---------解析存在问题--------------'
+            print '---------完成页码----------', page
+            page += 1
+
+    # ---------------proxy360------------------
+
+    def get_proxies_proxy360(self):
+        # page = random.randint(1, 10)
+        print'爬取--proxy360--中'
+        page = 1
+        page_stop = 2  # page + self.page
+        while page < page_stop:
+            url = 'http://www.proxy360.cn/default.aspx'
+            try:
+
+                html = requests.get(url, headers=self.headers).content
+                soup = BeautifulSoup(html, 'lxml')
+                ip_list = soup.find(id='ctl00_ContentPlaceHolder1_upProjectList')
+                tr = ip_list.find_all('div', class_='proxylistitem')
+                for i in range(1, len(tr)):
+                    ip_tmp = tr[i].find_all('span')[0].get_text().strip()
+                    port_tmp = tr[i].find_all('span')[1].get_text().strip()
+                    pro_list = ['http', 'https']
+                    for pro_tmp in pro_list:
+                        pro_tmp = pro_tmp.strip().lower() + '://'
+                        self.proxies.append(pro_tmp + ip_tmp + ':' + port_tmp)
                         # print 'lianjie----------->', pro_tmp + ip_tmp + ':' + port_tmp
             except:
                 print '---------解析存在问题--------------'
@@ -145,15 +172,26 @@ class Proxies(object):
                 tr = ip_list.find_all('tr')
                 # print 'tr', tr[0]
                 for i in range(1, len(tr)):
-                    ip_tmp = tr[i].find_all('td')[0].get_text().strip()
+                    ip_tmp = tr[i].find_all('td')[0]
+                    ip_right = []
+                    for tag in ip_tmp:
+
+                        if tag.name != 'p':
+
+                            if tag != ':':
+                                ip_right.append(str(tag.text))
+                            else:
+                                ip_right.append(':')
+                    ip_right = "".join(ip_right)
+                    # print 'ip_right:', ip_right
                     pro_list = tr[i].find_all('td')[2].get_text()
                     pro_list = pro_list.split(',')
                     for pro_tmp in pro_list:
-                        if 'http' in pro_tmp.lower():
-                            pro_tmp = pro_tmp.strip().lower() + '://'
-                            self.proxies.append(pro_tmp + ip_tmp )
-                        # print 'lianjie----------->', pro_tmp + ip_tmp
-            except:
+                        pro_tmp = pro_tmp.strip().lower() + '://'
+                        self.proxies.append(pro_tmp + ip_right )
+                        # print 'lianjie----------->', pro_tmp + ip_right
+            except Exception, e:
+                print e.args[0]
                 print '---------解析存在问题--------------'
             print '---------完成页码----------', page
             page += 1
@@ -179,10 +217,10 @@ class Proxies(object):
                     pro_list = tr[i].find_all('td')[3].get_text()
                     pro_list = pro_list.split('/')
                     for pro_tmp in pro_list:
-                        if 'http' in pro_tmp.lower():
-                            pro_tmp = pro_tmp.strip().lower() + '://'
-                            self.proxies.append(pro_tmp + ip_tmp + ':' + port_tmp)
-                            print 'lianjie----------->', pro_tmp + ip_tmp
+
+                        pro_tmp = pro_tmp.strip().lower() + '://'
+                        self.proxies.append(pro_tmp + ip_tmp + ':' + port_tmp)
+                            # print 'lianjie----------->', pro_tmp + ip_tmp
             except:
                 print '---------解析存在问题--------------'
             print '---------完成页码----------', page
@@ -223,11 +261,12 @@ class Proxies(object):
             # print 'woyaokande-----', proxies
             try:
                 if protocol == 'http':
-                    if requests.get('http://baidu.com', proxies=proxies, timeout=2).status_code == 200:
+                    # pass
+                    if requests.get('http://dblp.org', proxies=proxies, timeout=3).status_code == 200:
                         # print ('success %s' % proxy)
                         new_queue.put(proxy)
                 else:
-                    if requests.get('https://baidu.com', proxies=proxies, timeout=2).status_code == 200:
+                    if requests.get('https://baidu.com', proxies=proxies, timeout=3).status_code == 200:
                         # print ('success %s' % proxy)
                         new_queue.put(proxy)
             except:
@@ -291,10 +330,17 @@ class Proxies(object):
         print '------------生成-----------'
         # self.get_proxies_nn()  # 高匿
         self.proxies = []
+        self.get_proxies_proxy360()
         self.get_proxies_xdaili()
         # self.get_proxies_wt()           # xicidali
         self.get_proxies_kuaidaili()
         self.get_proxies_goubanjia()
+
+        print '获取未检测ip个数:', len(self.proxies)
+
+        # 已解决出现不对格式的ip
+        # for i in range(len(self.proxies)):
+        #     self.proxies[i] = str(self.proxies[i]).replace('..', '.')
 
         self.verify_proxies()
         print '获取有效ip个数:', len(self.proxies)
@@ -341,13 +387,13 @@ class Proxies(object):
     def thread_insert(self):
         while True:
             self.get_insert()
-            time.sleep(60+random.uniform(1,5))
+            time.sleep(40+random.uniform(1,5))
 
     # 每分钟检查一次
     def thread_check(self):
         while True:
             self.self_check()
-            time.sleep(60+random.uniform(1,5))
+            time.sleep(100+random.uniform(1,5))
 
 
 if __name__ == '__main__':
@@ -364,6 +410,8 @@ if __name__ == '__main__':
 
     a = Proxies()
     # a.get_proxies_goubanjia()
+
+
     raw_input_do = raw_input("选择操作:\n1.插入\n2.自检\n")
     if raw_input_do == '1':
         a.thread_insert()

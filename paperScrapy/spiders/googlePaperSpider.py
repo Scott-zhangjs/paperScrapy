@@ -9,6 +9,7 @@ from scrapy.http import Request
 from paperScrapy.items import GooglePaperItem
 from paperScrapy.tools.mysqlpool import MysqlPool
 from scrapy.http.cookies import CookieJar
+from user_agent import generate_user_agent
 
 
 
@@ -35,18 +36,20 @@ class GooglePaperSpider(scrapy.Spider):
         # # 'Upgrade-Insecure-Requests': '1',
         # 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
 
-        'accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 		'Accept-Encoding':'gzip, deflate, sdch, br',
 		'Accept-Language':'zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4',
 		'Connection':'keep-alive',
-		'Host':'202.168.155.123',
-		'Referer':'http://202.168.155.123/scholar?hl=en&num=20&as_sdt=0',
+		'Host':'xue.glgoo.org',
+		'Referer':'https://xue.glgoo.org/scholar?hl=en&num=20&as_sdt=0',
 		'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
-		'upgrade-insecure-requests': '1',
-		# 'Cookie':'NID=102=kSuLMTVuwiz-IbsNK51c-j-g6Zq7Th5kYaFeln-oXGyFTQunQt3dx4DwL1rvNaxW2xqMAvX6VgcSb3dIUR8DY6rmjS4QOxS4Pn8y3QdtikOrSn_tMAeHdPovK8hpqWWu; UM_distinctid=15bddf3c16678e-02cb51cc75d215-317d0258-c0000-15bddf3c1676bc; GZ=Z=1; GSP=NW=1:LM=1494077416:S=Rst0w5YWQMYIRMPk; CNZZDATA1253100982=558052600-1494074179-%7C1494074179',
+		'Upgrade-insecure-requests': '1',
+		# 'Cookie':'NID=102=pyCjX1MOSHvPDqPOZUIKBizmW0foKeaR3bJTv_D1-rPXp6lSngB_9hJlm3E8S_kh7JXmARV5L75mFAyZRxPNB755G_EQN5OQBliF2ED7SEIe_7Vkc_uRo7ZLL5O-5jDN; GSP=LM=1494141126:S=n66R0pUXuVXV-niY; Hm_lvt_6399b1342e7e174a203e2eb98d019207=1494141073; Hm_lpvt_6399b1342e7e174a203e2eb98d019207=1494141828',
     }
 
-    cookie = []
+    # cookie = []
+
+
 
     mypool = MysqlPool()  # 创建连接池
 
@@ -63,7 +66,33 @@ class GooglePaperSpider(scrapy.Spider):
     				and paper_nbCitation = -1"
 
     ccf_paper_set = mypool.getAll(ccf_sql_select, ("A", "Conference"))  # 记录所有待查询的venue集合
+
+    # 计算成功的个数
     count = 0
+    # url列表
+    url = [
+        "http://g.sci-hub.cn/",
+        # "https://g.zmirrordemo.com/extdomains/",
+        # "https://kuaiguge.co/",
+        # "https://google.speeder.cf/extdomains/",
+        # "https://e.ggkai.men/extdomains/",
+        # "http://c1.zgdhhjha.com/",
+        # "http://g2.zgdhhjha.com/",
+        # "http://g4.zgdhhjha.com/",
+    ]
+    # 对应host列表
+    host= [
+        "g.sci-hub.cn",
+        # "g.zmirrordemo.com",
+        # "kuaiguge.co",
+        # "google.speeder.cf",
+        # "e.ggkai.men/extdomains",
+        # "c1.zgdhhjha.com",
+        # "g2.zgdhhjha.com",
+        # "g4.zgdhhjha.com",
+    ]
+
+    # myCookiejar = ''
 
     # 获取初始request
     def start_requests(self):
@@ -76,53 +105,38 @@ class GooglePaperSpider(scrapy.Spider):
             paper_publicationYear = self.ccf_paper_set[i]["paper_publicationYear"]
             paper_publicationYear = str(paper_publicationYear)
 
-            url = "http://202.168.155.123/"    # 'http://202.168.155.123/' # "https://www.xichuan.pub/"
+            # url = "https://xue.glgoo.org/"    # 'http://202.168.155.123/' # "https://www.xichuan.pub/"
             # weizhui = '&btnG=&as_sdt=1%2C5&as_sdtp=&as_ylo=%d&as_yhi=%d' %(paper_publicationYear, paper_publicationYear)
-            urlTitle = url + "scholar?hl=en&q=" + str(paper_title.replace(":", "%3A") \
+
+            myUrl = i % len(self.url)
+            self.headers['Host'] = self.host[myUrl]
+            urlTitle = self.url[myUrl] + "scholar?hl=en&q=" + str(paper_title.replace(":", "%3A") \
                         .replace("'", "%27").replace("&", "%26").replace("(", "%28") \
                         .replace(")", "%29").replace( "/", "%2F").replace(" ", "+")) \
                        + '+' + '&btnG=&as_sdtp=&as_ylo=' + paper_publicationYear \
                        + '&as_yhi=' + paper_publicationYear
 
+            # 随机产生user-agent
+            # self.headers['User-Agent'] = generate_user_agent()
+            self.headers['Referer'] = urlTitle
+
+
             # 通过meta传递参数venue_id、venue_type，方便后续的数据库存取
-            if len(self.cookie):
-                self.headers["Cookie"] = random.choice(self.cookie)
+            # if i%10 == 0:
+            # myJar = i % 20
             yield Request(urlTitle, headers=self.headers,
                           meta={'paper_id': paper_id, 'paper_title': paper_title},
                           callback=self.parse_googlePaper)
-
-            if i > 0 and i % 50 == 0:
-
-                self.cookie = []
-                print'清空cookies, 睡一会.(～﹃～)~zZ'
-                sleep(random.uniform(10,15))
-                c
-                # Change_Cookie(self.headers)
-
-
-            # if self.count < len(self.ccf_paper_set):
-            #     # 从CCF集合中取出
-            #     paper_id = self.ccf_paper_set[self.count]["paper_id"]
-            #     paper_title = self.ccf_paper_set[self.count]["paper_title"]
-            #     paper_publicationYear = self.ccf_paper_set[self.count]["paper_publicationYear"]
-            #     paper_publicationYear = str(paper_publicationYear)
-            #
-            #     url = "http://g.sci-hub.cn/"  # 'http://202.168.155.123/' # "https://www.xichuan.pub/"
-            #     # weizhui = '&btnG=&as_sdt=1%2C5&as_sdtp=&as_ylo=%d&as_yhi=%d' %(paper_publicationYear, paper_publicationYear)
-            #     urlTitle = url + "scholar?hl=en&q=" + str(paper_title.replace(":", "%3A") \
-            #                                               .replace("'", "%27").replace("&", "%26").replace("(", "%28") \
-            #                                               .replace(")", "%29").replace("/", "%2F").replace(" ", "+")) \
-            #                + '+' + '&btnG=&as_sdtp=&as_ylo=' + paper_publicationYear \
-            #                + '&as_yhi=' + paper_publicationYear
-            #
-            #     # 通过meta传递参数venue_id、venue_type，方便后续的数据库存取
-            #     yield Request(urlTitle, headers=self.headers,
-            #                   meta={'paper_id': paper_id, 'paper_title': paper_title},
-            #                   callback=self.parse_googlePaper)
-            #
-            #     self.count += 1   # 移除查询过的
             # else:
-            #     print '空集合,查询结束!'
+            # yield Request(urlTitle, headers=self.headers,
+            #               meta={'cookiejar': i, 'paper_id': paper_id, 'paper_title': paper_title},
+            #               callback=self.parse_googlePaper)
+
+            # print 'headers is ------->', self.headers
+            # print 'mycookiejar is ------->', self.myCookiejar
+            if i > 0 and i % 100 == 0:
+                print' 睡一会.(～﹃～)~zZ'
+                sleep(random.uniform(10,15))
 
     def parse_googlePaper(self, response):
         """
@@ -132,16 +146,11 @@ class GooglePaperSpider(scrapy.Spider):
         """
         self.count += 1 # 计数
         print '成功的个数: ', self.count
+        # self.myCookiejar = response.meta['cookiejar']
 
-        self.Change_Cookie(response)
-
-        paper_id = response.meta['paper_id']  # 从meta取出变量paper_id
+        paper_id = response.meta['paper_id']    # 从 meta取出变量paper_id
         paper_title = response.meta['paper_title']  # 从meta取出变量paper_id
         print 'parse_googlePaper: paper_id', paper_id
-
-        # cookieJar = response.meta.setdefault('cookie_jar', CookieJar())
-        # print 'cookjar:', cookieJar
-        # cookieJar.extract_cookies(response, response.request)
 
         try:
 
@@ -234,30 +243,7 @@ class GooglePaperSpider(scrapy.Spider):
             yield item
 
 
-    def Change_Cookie(self, response):
-        # Referer_tmp =  headers['Referer']
-        # url = "http://g.sci-hub.cn/scholar"
-        # headers['User-Agent'] = generate_user_agent()
-        # headers['Referer'] = 'http://dir.scmor.com/google/'
-        try:
-            if response.status != 200:
-                raise Exception('---------当前未连接成功!--------------')
 
-            # 更换Cookie，重置headers
-            cookie_list = response.headers.getlist('Set-Cookie') # 为cookie属性与值的字典
-            print 'cookie_dic--------->', cookie_list
-            try:
-                cookie_NID = cookie_list[0].split(';')[0]
-                cookie_GSP = cookie_list[1].split(';')[0]
-                cookie = cookie_NID + "; " + cookie_GSP
-                self.cookie.append(cookie)
-                print "CURRENT COOKIE: " + cookie
-                # headers['Referer'] = Referer_tmp #换回原来的Referer
-                # return cookie
-            except:
-                print "Change cookie FAILED!"
-        except Exception, e:
-            print e.args[0]
 
 
 
