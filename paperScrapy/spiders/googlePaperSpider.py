@@ -71,22 +71,30 @@ class GooglePaperSpider(scrapy.Spider):
     count = 0
     # url列表
     url = [
-        "http://g.sci-hub.cn/",
+        "https://scholar.google.com.hk/",
+        # "https://bb.qqmmgj.com/",
+        # "http://g.sci-hub.cn/",
         # "https://g.zmirrordemo.com/extdomains/",
         # "https://kuaiguge.co/",
         # "https://google.speeder.cf/extdomains/",
+        # "https://c.ggkai.men/extdomains/",
         # "https://e.ggkai.men/extdomains/",
+        # "https://d.ggkai.men/extdomains/",
         # "http://c1.zgdhhjha.com/",
         # "http://g2.zgdhhjha.com/",
         # "http://g4.zgdhhjha.com/",
     ]
     # 对应host列表
     host= [
-        "g.sci-hub.cn",
+        "scholar.google.com.hk",
+        # "bb.qqmmgj.com",
+        # "g.sci-hub.cn",
         # "g.zmirrordemo.com",
         # "kuaiguge.co",
         # "google.speeder.cf",
-        # "e.ggkai.men/extdomains",
+        # "c.ggkai.men",
+        # "e.ggkai.men",
+        # "d.ggkai.men",
         # "c1.zgdhhjha.com",
         # "g2.zgdhhjha.com",
         # "g4.zgdhhjha.com",

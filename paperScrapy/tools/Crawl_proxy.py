@@ -107,23 +107,30 @@ class Proxies(object):
         page = 1
         page_stop = 11#page + self.page
         while page < page_stop:
-            url = 'http://www.kuaidaili.com/proxylist/%d/' % page
+            # url = 'http://www.kuaidaili.com/proxylist/%d/' % page # 普通代理
+            url = 'http://www.kuaidaili.com/free/outha/%d/' % page   # 国外代理
             try:
 
                 html = requests.get(url, headers=self.headers).content
                 soup = BeautifulSoup(html, 'lxml')
-                ip_list = soup.find(id='index_free_list')
+                # ip_list = soup.find(id='index_free_list') # proxylist
+                ip_list = soup.find(id='list')
+                # print ip_list
                 tr = ip_list.find_all('tr')
+                # print tr
                 for i in range(1, len(tr)):
                     ip_tmp = tr[i].find_all('td')[0].get_text().strip()
+
                     port_tmp = tr[i].find_all('td')[1].get_text().strip()
                     pro_list = tr[i].find_all('td')[3].get_text()
                     pro_list = pro_list.split(',')
                     for pro_tmp in pro_list:
                         pro_tmp = pro_tmp.strip().lower() + '://'
-                        self.proxies.append(pro_tmp + ip_tmp + ':' + port_tmp)
+                        # self.proxies.append(pro_tmp + ip_tmp + ':' + port_tmp)
+                        self.proxies.append('https://' + ip_tmp + ':' + port_tmp)
                         # print 'lianjie----------->', pro_tmp + ip_tmp + ':' + port_tmp
-            except:
+            except Exception, e:
+                print e.args[0]
                 print '---------解析存在问题--------------'
             print '---------完成页码----------', page
             page += 1
@@ -136,7 +143,7 @@ class Proxies(object):
         page = 1
         page_stop = 2  # page + self.page
         while page < page_stop:
-            url = 'http://www.proxy360.cn/default.aspx'
+            url = 'http://www.proxy360.cn/Region/America'
             try:
 
                 html = requests.get(url, headers=self.headers).content
@@ -260,13 +267,13 @@ class Proxies(object):
             proxies = {protocol: proxy}
             # print 'woyaokande-----', proxies
             try:
-                if protocol == 'http':
+                if protocol == 'httpt':
                     # pass
                     if requests.get('http://dblp.org', proxies=proxies, timeout=3).status_code == 200:
                         # print ('success %s' % proxy)
                         new_queue.put(proxy)
-                else:
-                    if requests.get('https://baidu.com', proxies=proxies, timeout=3).status_code == 200:
+                elif protocol == 'https':
+                    if requests.get('https://scholar.google.com.hk', proxies=proxies, timeout=3).status_code == 200:
                         # print ('success %s' % proxy)
                         new_queue.put(proxy)
             except:

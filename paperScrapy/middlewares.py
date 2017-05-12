@@ -60,35 +60,37 @@ class ProxyMiddleware(object):
         print "this is request ip:" + proxy
         request.meta['proxy'] = proxy
 
-        # 添加cookie
-        # print 'the cookie list is :', self.cookie
-        host_tmp = str(request.headers["Host"])
-        print 'the count is -->', self.count, 'the host is --------------------------->', host_tmp
-        cur_cookie = []
-        # print 'the count is -->', self.count, 'the current cookie dic is ------------->', self.cookie
-        if self.cookie.has_key(host_tmp):
-            cur_cookie = self.cookie[host_tmp]
-        print 'the count is -->', self.count, 'the length of cookie is -------------------------->', len(cur_cookie)
-        print 'the count is -->', self.count, 'the header is ------------------------->', request.headers
-        if len(cur_cookie) > 0:
-            request.headers['Cookie'] = random.choice(cur_cookie)
-
-            print 'the count is -->', self.count, 'the new header is ------------------>', request.headers
-
-        # 定时清空cookie
-
-        self.count += 1
-
-        if self.count > 100:
-            print '----------------500次了,清空cookie啦----------------'
-            self.cookie = {}
-            self.count = 0
-
         # 这句话用于随机选择user-agent
         # ua = random.choice(self.user_agent_list)
         ua = generate_user_agent()
         if ua:
             request.headers.setdefault('User-Agent', ua)
+
+        # # 添加cookie
+        # # print 'the cookie list is :', self.cookie
+        # host_tmp = str(request.headers["Host"])
+        # print 'the count is -->', self.count, 'the host is --------------------------->', host_tmp
+        # cur_cookie = []
+        # # print 'the count is -->', self.count, 'the current cookie dic is ------------->', self.cookie
+        # if self.cookie.has_key(host_tmp):
+        #     cur_cookie = self.cookie[host_tmp]
+        # print 'the count is -->', self.count, 'the length of cookie is -------------------------->', len(cur_cookie)
+        # print 'the count is -->', self.count, 'the header is ------------------------->', request.headers
+        # if len(cur_cookie) > 0:
+        #     request.headers['Cookie'] = random.choice(cur_cookie)
+        #
+        #     print 'the count is -->', self.count, 'the new header is ------------------>', request.headers
+        #
+        # # 定时清空cookie
+        #
+        # self.count += 1
+        #
+        # if self.count > 100:
+        #     print '----------------500次了,清空cookie啦----------------'
+        #     self.cookie = {}
+        #     self.count = 0
+
+
 
 
 
