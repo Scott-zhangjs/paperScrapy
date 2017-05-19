@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import hashlib
 import random
 import requests
 from time import sleep
@@ -71,22 +72,32 @@ class GooglePaperSpider(scrapy.Spider):
     count = 0
     # url列表
     url = [
-        "https://scholar.google.com.hk/",
-        # "https://bb.qqmmgj.com/",
-        # "http://g.sci-hub.cn/",
-        # "https://g.zmirrordemo.com/extdomains/",
-        # "https://kuaiguge.co/",
-        # "https://google.speeder.cf/extdomains/",
-        # "https://c.ggkai.men/extdomains/",
-        # "https://e.ggkai.men/extdomains/",
-        # "https://d.ggkai.men/extdomains/",
-        # "http://c1.zgdhhjha.com/",
-        # "http://g2.zgdhhjha.com/",
-        # "http://g4.zgdhhjha.com/",
+        # "https://scholar.google.com.hk",
+        # "https://www.xichuan.pub",
+        # "http://gg2.firstguo.com",
+        "http://a3.zgdhhjha.com",
+        "https://xue.glgoo.com",
+        # "http://www.sci-hub.xyz",
+        # "https://bb.qqmmgj.com",
+        # "http://g.sci-hub.cn",
+        # "https://g.zmirrordemo.com/extdomains/scholar.google.com",
+        # "https://kuaiguge.co",
+        # "https://google.speeder.cf/extdomains/scholar.google.com",
+        # "https://c.ggkai.men/extdomains",
+        # "https://e.ggkai.men/extdomains",
+        # "https://d.ggkai.men/extdomains",
+        # "http://c1.zgdhhjha.com",
+        # "http://g2.zgdhhjha.com",
+        # "http://g4.zgdhhjha.com",
     ]
     # 对应host列表
     host= [
-        "scholar.google.com.hk",
+        # "scholar.google.com.hk",
+        # "www.xichuan.pub",
+        # "gg2.firstguo.com",
+        "a3.zgdhhjha.com",
+        "xue.glgoo.com",
+        # "www.sci-hub.xyz",
         # "bb.qqmmgj.com",
         # "g.sci-hub.cn",
         # "g.zmirrordemo.com",
@@ -101,6 +112,14 @@ class GooglePaperSpider(scrapy.Spider):
     ]
 
     # myCookiejar = ''
+
+    def getCookie(self):
+        # fake google id (looks like it is a 16 elements hex)
+        rand_str = str(random.random()).encode('utf8')
+        google_id = hashlib.md5(rand_str).hexdigest()[:16]
+
+        self.headers['Cookie'] = 'GSP=ID=%s' % google_id + ":CF=%d" % 4
+
 
     # 获取初始request
     def start_requests(self):
@@ -118,7 +137,7 @@ class GooglePaperSpider(scrapy.Spider):
 
             myUrl = i % len(self.url)
             self.headers['Host'] = self.host[myUrl]
-            urlTitle = self.url[myUrl] + "scholar?hl=en&q=" + str(paper_title.replace(":", "%3A") \
+            urlTitle = self.url[myUrl] + "/scholar?hl=en&q=" + str(paper_title.replace(":", "%3A") \
                         .replace("'", "%27").replace("&", "%26").replace("(", "%28") \
                         .replace(")", "%29").replace( "/", "%2F").replace(" ", "+")) \
                        + '+' + '&btnG=&as_sdtp=&as_ylo=' + paper_publicationYear \
@@ -127,6 +146,7 @@ class GooglePaperSpider(scrapy.Spider):
             # 随机产生user-agent
             # self.headers['User-Agent'] = generate_user_agent()
             self.headers['Referer'] = urlTitle
+            self.getCookie()
 
 
             # 通过meta传递参数venue_id、venue_type，方便后续的数据库存取
@@ -142,9 +162,9 @@ class GooglePaperSpider(scrapy.Spider):
 
             # print 'headers is ------->', self.headers
             # print 'mycookiejar is ------->', self.myCookiejar
-            if i > 0 and i % 100 == 0:
-                print' 睡一会.(～﹃～)~zZ'
-                sleep(random.uniform(10,15))
+            # if i > 0 and i % 100 == 0:
+            #     print' 睡一会.(～﹃～)~zZ'
+            #     sleep(random.uniform(10,15))
 
     def parse_googlePaper(self, response):
         """

@@ -66,16 +66,23 @@ class Proxies(object):
     # http
     def get_proxies_wt(self):
         # page = random.randint(1, 10)
+        print'爬取--xicidaili---http--中'
         page = 1
-        page_stop = 20#page + self.page
+        page_stop = 11  # page + self.page
+
         while page < page_stop:
-            url = 'http://www.xicidaili.com/wt/%d' % page
-            html = requests.get(url, headers=self.headers).content
-            soup = BeautifulSoup(html, 'lxml')
-            ip_list = soup.find(id='ip_list')
-            for odd in ip_list.find_all(class_='odd'):
-                protocol = odd.find_all('td')[5].get_text().lower() + '://'
-                self.proxies.append(protocol + ':'.join([x.get_text() for x in odd.find_all('td')[1:3]]))
+            url = 'http://www.xicidaili.com/wt/%d/' % page
+            try:
+
+                html = requests.get(url, headers=self.headers).content
+                soup = BeautifulSoup(html, 'lxml')
+                ip_list = soup.find(id='ip_list')
+                for odd in ip_list.find_all(class_='odd'):
+                    protocol = odd.find_all('td')[5].get_text().lower() + '://'
+                    self.proxies.append(protocol + ':'.join([x.get_text() for x in odd.find_all('td')[1:3]]))
+            except:
+                print '---------解析存在问题--------------'
+            print '---------完成页码----------', page
             page += 1
 
     # https
@@ -107,14 +114,14 @@ class Proxies(object):
         page = 1
         page_stop = 11#page + self.page
         while page < page_stop:
-            # url = 'http://www.kuaidaili.com/proxylist/%d/' % page # 普通代理
-            url = 'http://www.kuaidaili.com/free/outha/%d/' % page   # 国外代理
+            url = 'http://www.kuaidaili.com/proxylist/%d/' % page # 普通代理
+            # url = 'http://www.kuaidaili.com/free/outha/%d/' % page   # 国外代理
             try:
 
                 html = requests.get(url, headers=self.headers).content
                 soup = BeautifulSoup(html, 'lxml')
-                # ip_list = soup.find(id='index_free_list') # proxylist
-                ip_list = soup.find(id='list')
+                ip_list = soup.find(id='index_free_list') # proxylist
+                # ip_list = soup.find(id='list') # 国外代理
                 # print ip_list
                 tr = ip_list.find_all('tr')
                 # print tr
@@ -143,7 +150,7 @@ class Proxies(object):
         page = 1
         page_stop = 2  # page + self.page
         while page < page_stop:
-            url = 'http://www.proxy360.cn/Region/America'
+            url = 'http://www.proxy360.cn/default.aspx'
             try:
 
                 html = requests.get(url, headers=self.headers).content
@@ -267,17 +274,21 @@ class Proxies(object):
             proxies = {protocol: proxy}
             # print 'woyaokande-----', proxies
             try:
-                if protocol == 'httpt':
+                if protocol == 'http':
                     # pass
-                    if requests.get('http://dblp.org', proxies=proxies, timeout=3).status_code == 200:
-                        # print ('success %s' % proxy)
+                    tmp = requests.get('http://dblp.org', proxies=proxies, timeout=2).status_code
+                    print 'status code is ', tmp
+                    if tmp == 200:
+                        print ('success %s' % proxy)
                         new_queue.put(proxy)
                 elif protocol == 'https':
-                    if requests.get('https://scholar.google.com.hk', proxies=proxies, timeout=3).status_code == 200:
-                        # print ('success %s' % proxy)
-                        new_queue.put(proxy)
-            except:
+                    pass
+                    # if requests.get('https://scholar.google.com.hk', proxies=proxies, timeout=3).status_code == 200:
+                    #     # print ('success %s' % proxy)
+                    #     new_queue.put(proxy)
+            except Exception, e:
                 # pass
+                # print e.args[0]
                 print ('fail %s' % proxy)
 
     # 写数据库
@@ -339,7 +350,7 @@ class Proxies(object):
         self.proxies = []
         self.get_proxies_proxy360()
         self.get_proxies_xdaili()
-        # self.get_proxies_wt()           # xicidali
+        # self.get_proxies_wt()           # xicidali--http
         self.get_proxies_kuaidaili()
         self.get_proxies_goubanjia()
 
@@ -375,6 +386,7 @@ class Proxies(object):
             print '!!!!!!!!!!!数据库空!!!!!!!!!'
             self.get_insert()
             results = self.dbpool.getAll(select_sql)
+        # print '---------the results is---------', results
         res = random.choice(results)
         return res['proxies_link']
 
@@ -416,7 +428,7 @@ if __name__ == '__main__':
 
 
     a = Proxies()
-    # a.get_proxies_goubanjia()
+    # a.get_proxies_kuaidaili()
 
 
     raw_input_do = raw_input("选择操作:\n1.插入\n2.自检\n")

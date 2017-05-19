@@ -9,6 +9,7 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
+
 BOT_NAME = 'paperScrapy'
 
 SPIDER_MODULES = ['paperScrapy.spiders']
@@ -19,12 +20,12 @@ NEWSPIDER_MODULE = 'paperScrapy.spiders'
 #USER_AGENT = 'paperScrapy (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+# ROBOTSTXT_OBEY = True
 
 
 # Mysql数据库的配置信息
 MYSQL_HOST = '192.168.1.198'
-MYSQL_DBNAME = 'citation'           # 数据库名字，请修改
+MYSQL_DBNAME = 'citation_raw_qian'           # 数据库名字，请修改
 MYSQL_USER = 'jingshuai'            # 数据库账号，请修改
 MYSQL_PASSWD = '123456'             # 数据库密码，请修改
 
@@ -34,27 +35,25 @@ MYSQL_PORT = 3306                   # 数据库端口，在dbhelper中使用
 ROBOTSTXT_OBEY = False
 
 # 下载延迟反被封锁ip
-# CONCURRENT_REQUESTS = 0.5
-CONCURRENT_REQUESTS = 5
-# CONCURRENT_ITEMS =
-DOWNLOAD_DELAY = 3
+CONCURRENT_REQUESTS = 8
+DOWNLOAD_DELAY = 3.5
 
 # 禁用cookies
 # COOKIES_ENABLED = False
-COOKIES_DEBUG = True
+# COOKIES_DEBUG = True
 
 # AUTOTHROTTLE_ENABLED = True
 # AUTOTHROTTLE_START_DELAY = 1
 
 
 # 配置代理
-DOWNLOADER_MIDDLEWARES = {
- 'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
- 'paperScrapy.middlewares.ProxyMiddleware': 100,
-}
+# DOWNLOADER_MIDDLEWARES = {
+#  'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
+#  'paperScrapy.middlewares.ProxyMiddleware': 100,
+# }
 
 
-# Configure item pipelines
+# Configure item pipelinesn
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 # ITEM_PIPELINES = {
 #     'paperScrapy.pipelines.PaperscrapyPipeline': 300,         # 保存到mysql数据库

@@ -56,6 +56,7 @@ class ProxyMiddleware(object):
             # print 'request.url.......', request.url
             proxy = self.cproxy.get_random_proxy_https()
         else:
+            print '---------find in mysql---------'
             proxy = self.cproxy.get_random_proxy_http()
         print "this is request ip:" + proxy
         request.meta['proxy'] = proxy
@@ -114,7 +115,7 @@ class ProxyMiddleware(object):
 
         # if len(self.cookie) < 50:
 
-        self.get_cookie(request, response)
+        # self.get_cookie(request, response)
 
         return response
 

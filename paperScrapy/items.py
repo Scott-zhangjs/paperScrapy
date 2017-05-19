@@ -29,3 +29,12 @@ class GooglePaperItem(scrapy.Item):
     paper_rawInfo = scrapy.Field()          # 摘要
     paper_rawURL = scrapy.Field()           # 原始链接
     paper_relatedURL = scrapy.Field()       # 相关论文链接
+
+
+
+class PaperDBLPItem(scrapy.Item):
+    # define the fields for your item here like:
+
+    name = scrapy.Field()       # dblp_name
+    year = scrapy.Field()       # public year
+    paper_id = scrapy.Field()   # venue_id

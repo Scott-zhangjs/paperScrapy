@@ -55,6 +55,7 @@ from user_agent import generate_user_agent
 # fake google id (looks like it is a 16 elements hex)
 rand_str = str(random.random()).encode('utf8')
 google_id = hashlib.md5(rand_str).hexdigest()[:16]
+
 print 'google_id', google_id
 
 GOOGLE_SCHOLAR_URL = "https://www.xichuan.pub"
@@ -102,6 +103,7 @@ def query(searchstr, outformat=FORMAT_BIBTEX, allresults=False):
     url = GOOGLE_SCHOLAR_URL + searchstr
     header = HEADERS
     header['Cookie'] = header['Cookie'] + ":CF=%d" % outformat
+    print 'cookie', header['Cookie']
     print 'url', url
     request = Request(url, headers=header)
     response = urlopen(request)
@@ -129,7 +131,8 @@ def query(searchstr, outformat=FORMAT_BIBTEX, allresults=False):
 def get_links(html, outformat):
     """Return a list of reference links from the html."""
     if outformat == FORMAT_BIBTEX:
-        refre = re.compile(r'<a href="(/scholar\.bib\?[^"]*)')
+        refre = re.compile(r'<a href="(/scholar\.bib\?[^"]*)"')
+        # refre = re.compile(r'<a href="./scholar\.bib\?.')
     elif outformat == FORMAT_ENDNOTE:
         refre = re.compile(r'<a href="(/scholar\.enw\?[^"]*)"')
     elif outformat == FORMAT_REFMAN:
@@ -137,6 +140,7 @@ def get_links(html, outformat):
     elif outformat == FORMAT_WENXIANWANG:
         refre = re.compile(r'<a href="(/scholar\.ral\?[^"]*)"')
     reflist = refre.findall(html)
+    print 'reflist', reflist
     # escape html entities
     reflist = [re.sub('&(%s);' % '|'.join(name2codepoint), lambda m:
                       chr(name2codepoint[m.group(1)]), s) for s in reflist]

@@ -103,4 +103,24 @@ line = venue_name.replace("%", "%25").replace(" ", "%20").replace(",", "%2C")\
 	Australasian: 78个（均为会议）
 	其他：39个
 
+----------------------------Updated  in 5.16 2017-------------------------------
+1. CCF和CORE表的新发现
+	a. 存在3个ccf name 重复, 原因是一个venue属于不同的computercategory
+	# CCF_id, CCF_name, CCF_abbreviation, CCF_dblpname, CCF_type, CCF_classification, computercategory_computerCategory_id, CCF_dblpname2, CCF_dblpname3
+	'265', 'Data and Knowledge Engineering', 'DKE', 'NOT IN DBLP', 'journal', 'B', '5', NULL, NULL
+	'423', 'Data and Knowledge Engineering', 'DKE', 'NOT IN DBLP', 'journal', 'B', '8', NULL, NULL
+	'278', 'Information Processing Letters', 'IPL', 'Inf. Process. Lett.', 'journal', 'C', '5', NULL, NULL
+	'339', 'Information Processing Letters', '', 'Inf. Process. Lett.', 'journal', 'C', '6', NULL, NULL
+	'282', 'International Journal of Intelligent Systems', 'IJIS', 'Int. J. Intell. Syst.', 'journal', 'C', '5', NULL, NULL
+	'459', 'International Journal of Intelligent Systems', 'IJIS', 'Int. J. Intell. Syst.', 'journal', 'C', '8', NULL, NULL
+
+	b. 
+
+
+
+
+
+
+
+
 

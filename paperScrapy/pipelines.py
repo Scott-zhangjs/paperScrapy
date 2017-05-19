@@ -129,4 +129,34 @@ class DblpPipeline(object):
         print venue_id, ' core is updated successful!'
 
 
+class DblpPaperPipeline(object):
+    '''
+           保存到数据库中对应的class
+              1、在settings.py文件中配置
+              2、在自己实现的爬虫类中yield item,会自动执行
+           '''
+
+    dbpool = MysqlPool()
+
+    # pipeline默认调用
+    def process_item(self, item, spider):
+        paper_id = item['paper_id']
+        dblp_name = item['name']
+        dblp_year = item['year']
+
+        if dblp_year != -1:
+            sql_update = "update targetpaper set targetPaper_dblp_name = %s, targetPaper_publicationYear = %s " \
+                         "where targetPaper_id = %s"
+            params = (dblp_name, dblp_year, paper_id)
+        else:
+            sql_update = "update targetpaper set targetPaper_dblp_name = %s " \
+                         "where targetPaper_id = %s"
+            params = (dblp_name, paper_id)
+
+        # print 'params', params
+        self.dbpool.update(sql_update, params)
+        self.dbpool.end()
+        print paper_id, ' is updated successful!'
+
+
 
