@@ -3,7 +3,7 @@
 
 from scrapy import cmdline
 
-from paperScrapy.tools.mysqlpool import MysqlPool
+# from paperScrapy.tools.mysqlpool import MysqlPool
 # from tools import mygscholar
 
 # print mygscholar.query('artificial neural networks')

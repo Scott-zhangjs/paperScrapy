@@ -6,6 +6,7 @@ from scrapy.http import Request
 
 from paperScrapy.items import PaperscrapyItem, PaperDBLPItem
 from paperScrapy.tools.mysqlpool import MysqlPool
+from user_agent import generate_user_agent
 
 
 class DblpPaperSpider(scrapy.Spider):
@@ -27,6 +28,7 @@ class DblpPaperSpider(scrapy.Spider):
         'Accept-Encoding': 'gzip, deflate, sdch',
         'Referer': 'http://dblp.uni-trier.de/',
         'Cookie': 'dblp-hideable-show-feeds=true; dblp-hideable-show-rawdata=true; dblp-view=y; dblp-search-mode=c',
+        # 'Cookie': 'dblp-view=y; dblp-search-mode=c',
         'Connection': 'keep-alive',
         'Cache-Control': 'max-age=0',
     }
@@ -37,12 +39,13 @@ class DblpPaperSpider(scrapy.Spider):
 
     # 查找targetpaper 中
     targetpaper_sql_select = "SELECT targetPaper_id, targetPaper_scholarTitle FROM targetpaper " \
-                             "WHERE targetPaper_dblp_name is NULL"
+                             "WHERE targetPaper_dblp_name is NULL and targetPaper_id>=1530000"
 
     targetpaper_set = mypool.getAll(targetpaper_sql_select)
     print 'first data is ', targetpaper_set[0]
     # 计数
     count = len(targetpaper_set)
+    print 'the count is ', count
 
     # 获取初始request
     def start_requests(self):
@@ -50,6 +53,16 @@ class DblpPaperSpider(scrapy.Spider):
             "http://dblp.uni-trier.de/search?q=",
             "http://dblp.org/search?q="
         ]
+        tmphost = [
+            "dblp.uni-trier.de",
+            "dblp.org"
+        ]
+
+        tmpreferer = [
+            "http://dblp.uni-trier.de",
+            "http://dblp.org"
+        ]
+
         for i in range(len(self.targetpaper_set)):
         # for i in range(100):
         # i = 0
@@ -58,8 +71,11 @@ class DblpPaperSpider(scrapy.Spider):
             paper_id = self.targetpaper_set[i]["targetPaper_id"]
             line = paper_title.replace("%", "%25").replace(" ", "%20").replace(",", "%2C")\
                 .replace(":", "%3A").replace("?", "%3F").replace("&", "%26").replace("'", "%27")
-            url = tmpurl[i%2] + line
-            # url = 'c' + line
+            url = tmpurl[i % 2] + line
+            self.headers['Host'] = tmphost[i % 2]
+            self.headers['Referer'] = tmpreferer[i % 2]
+            self.headers['User-Agent'] = generate_user_agent()
+            # url = 'http://dblp.uni-trier.de/search?q=' + line
             print 'the url is', url
 
             yield Request(url, headers=self.headers,

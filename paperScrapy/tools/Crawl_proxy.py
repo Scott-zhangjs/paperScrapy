@@ -276,9 +276,9 @@ class Proxies(object):
             try:
                 if protocol == 'http':
                     # pass
-                    tmp = requests.get('http://dblp.org', proxies=proxies, timeout=2).status_code
-                    print 'status code is ', tmp
-                    if tmp == 200:
+                    if requests.get('http://www.qq.com/', proxies=proxies, timeout=2).status_code == 200:
+                    # print 'status code is ', tmp
+                    # if tmp == 200:
                         print ('success %s' % proxy)
                         new_queue.put(proxy)
                 elif protocol == 'https':

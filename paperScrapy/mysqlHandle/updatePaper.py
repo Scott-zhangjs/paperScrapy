@@ -16,9 +16,9 @@ print 'start searching...'
 cur.execute(sql_select)
 ans = cur.fetchall()    # 获得结果中的所有数据
 
-print ans[0]
-print ans[0][0], ans[0][1]
-print len(ans)
+# print ans[0]
+# print ans[0][0], ans[0][1]
+# print len(ans)
 
 print 'start updating'
 sql_update = "update paper set venue_venue_id = %s where paper_venue_name = %s"
