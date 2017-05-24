@@ -18,10 +18,13 @@ import random
 from paperScrapy.tools.Crawl_proxy import Proxies
 from user_agent import generate_user_agent
 
+from paperScrapy.tools.mysqlpool import MysqlPool
+
 
 class ProxyMiddleware(object):
 
-    cproxy = Proxies()
+    # cproxy = Proxies()
+
     # the default user_agent_list composes chrome,I E,firefox,Mozilla,opera,netscape
     user_agent_list = [
         "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1",
@@ -54,10 +57,10 @@ class ProxyMiddleware(object):
         # proxy = self.get_random_proxy()
         if 'https' in str(request.url.split(":")[0]):
             # print 'request.url.......', request.url
-            proxy = self.cproxy.get_random_proxy_https()
+            proxy = self.get_random_proxy_https()
         else:
-            print '---------find in mysql---------'
-            proxy = self.cproxy.get_random_proxy_http()
+            # print '---------find in mysql---------'
+            proxy = self.get_random_proxy_http()
         print "this is request ip:" + proxy
         request.meta['proxy'] = proxy
 
@@ -103,9 +106,9 @@ class ProxyMiddleware(object):
             # proxy = self.get_random_proxy()
             if 'https' in str(request.url.split(":")[0]):
                 # print 'request.url.......', request.url
-                proxy = self.cproxy.get_random_proxy_https()
+                proxy = self.get_random_proxy_https()
             else:
-                proxy = self.cproxy.get_random_proxy_http()
+                proxy = self.get_random_proxy_http()
             print("this is response ip:" + proxy)
             # 对当前reque加上代理
             request.meta['proxy'] = proxy
@@ -143,7 +146,30 @@ class ProxyMiddleware(object):
         except Exception, e:
             print e.args[0]
 
+    def get_random_proxy_http(self):
+        '''随机从数据库中读取proxy'''
+        dbpool = MysqlPool()
+        select_sql = "select proxies_link from proxies where proxies_status = 1 and proxies_type = 'http'"
+        results = dbpool.getAll(select_sql)
+        while len(results) == 0:
+            print '!!!!!!!!!!!数据库空!!!!!!!!!'
+            time.sleep(500)
+            results = dbpool.getAll(select_sql)
+        # print '---------the results num is---------', len(results)
+        res = random.choice(results)
+        return res['proxies_link']
 
+    def get_random_proxy_https(self):
+        '''随机从数据库中读取proxy'''
+        dbpool = MysqlPool()
+        select_sql = "select proxies_link from proxies where proxies_status = 1 and proxies_type = 'https'"
+        results = dbpool.getAll(select_sql)
+        while not results:
+            print '!!!!!!!!!!!数据库空!!!!!!!!!'
+            time.sleep(500)
+            results = dbpool.getAll(select_sql)
+        res = random.choice(results)
+        return res['proxies_link']
 
     def get_random_proxy(self):
         '''随机从文件中读取proxy'''

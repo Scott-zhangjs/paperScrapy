@@ -276,7 +276,7 @@ class Proxies(object):
             try:
                 if protocol == 'http':
                     # pass
-                    if requests.get('http://www.qq.com/', proxies=proxies, timeout=2).status_code == 200:
+                    if requests.get('http://dblp.org', proxies=proxies, timeout=2).status_code == 200:
                     # print 'status code is ', tmp
                     # if tmp == 200:
                         print ('success %s' % proxy)
@@ -350,7 +350,7 @@ class Proxies(object):
         self.proxies = []
         self.get_proxies_proxy360()
         self.get_proxies_xdaili()
-        # self.get_proxies_wt()           # xicidali--http
+        self.get_proxies_wt()           # xicidali--http
         self.get_proxies_kuaidaili()
         self.get_proxies_goubanjia()
 
@@ -377,30 +377,6 @@ class Proxies(object):
         self.del_sql()
         print '------------自检完成-----------'
 
-    def get_random_proxy_http(self):
-        '''随机从数据库中读取proxy'''
-
-        select_sql = "select proxies_link from proxies where proxies_status = 1 and proxies_type = 'http'"
-        results = self.dbpool.getAll(select_sql)
-        while len(results) == 0:
-            print '!!!!!!!!!!!数据库空!!!!!!!!!'
-            self.get_insert()
-            results = self.dbpool.getAll(select_sql)
-        # print '---------the results is---------', results
-        res = random.choice(results)
-        return res['proxies_link']
-
-    def get_random_proxy_https(self):
-        '''随机从数据库中读取proxy'''
-
-        select_sql = "select proxies_link from proxies where proxies_status = 1 and proxies_type = 'https'"
-        results = self.dbpool.getAll(select_sql)
-        while not results:
-            print '!!!!!!!!!!!数据库空!!!!!!!!!'
-            self.get_insert()
-            results = self.dbpool.getAll(select_sql)
-        res = random.choice(results)
-        return res['proxies_link']
 
     # 每五分钟插入一次
     def thread_insert(self):

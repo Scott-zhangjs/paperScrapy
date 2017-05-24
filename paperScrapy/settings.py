@@ -35,23 +35,23 @@ MYSQL_PORT = 3306                   # 数据库端口，在dbhelper中使用
 ROBOTSTXT_OBEY = False
 
 # 下载延迟反被封锁ip
-CONCURRENT_REQUESTS = 8
+CONCURRENT_REQUESTS = 10
 # CONCURRENT_REQUESTS_PER_DOMAIN = 2
-DOWNLOAD_DELAY = 3.5
+DOWNLOAD_DELAY = 1
 
 # 禁用cookies
-# COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 # COOKIES_DEBUG = True
 
 # AUTOTHROTTLE_ENABLED = True
 # AUTOTHROTTLE_START_DELAY = 1
 
 
-# 配置代理
-# DOWNLOADER_MIDDLEWARES = {
-#  'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
-#  'paperScrapy.middlewares.ProxyMiddleware': 100,
-# }
+# # 配置代理
+DOWNLOADER_MIDDLEWARES = {
+ 'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
+ 'paperScrapy.middlewares.ProxyMiddleware': 400,
+}
 
 
 # Configure item pipelinesn

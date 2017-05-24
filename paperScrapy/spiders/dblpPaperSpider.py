@@ -4,6 +4,8 @@ from time import sleep
 import scrapy
 from scrapy.http import Request
 
+
+# import urllib2
 from paperScrapy.items import PaperscrapyItem, PaperDBLPItem
 from paperScrapy.tools.mysqlpool import MysqlPool
 from user_agent import generate_user_agent
@@ -22,12 +24,13 @@ class DblpPaperSpider(scrapy.Spider):
 
     headers = {
         'Host': 'dblp.uni-trier.de',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+        # 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36',
         'Accept': 'text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01',
         'Accept-Language': 'zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4',
         'Accept-Encoding': 'gzip, deflate, sdch',
         'Referer': 'http://dblp.uni-trier.de/',
-        'Cookie': 'dblp-hideable-show-feeds=true; dblp-hideable-show-rawdata=true; dblp-view=y; dblp-search-mode=c',
+        # 'Cookie': 'dblp-hideable-show-feeds=true; dblp-hideable-show-rawdata=true; dblp-view=y; dblp-search-mode=c',
         # 'Cookie': 'dblp-view=y; dblp-search-mode=c',
         'Connection': 'keep-alive',
         'Cache-Control': 'max-age=0',
@@ -39,7 +42,8 @@ class DblpPaperSpider(scrapy.Spider):
 
     # 查找targetpaper 中
     targetpaper_sql_select = "SELECT targetPaper_id, targetPaper_scholarTitle FROM targetpaper " \
-                             "WHERE targetPaper_dblp_name is NULL and targetPaper_id>=1530000"
+                             "WHERE targetPaper_dblp_name is NULL and targetPaper_id>=2100000 " \
+                             # "and targetPaper_id>1530000"
 
     targetpaper_set = mypool.getAll(targetpaper_sql_select)
     print 'first data is ', targetpaper_set[0]
@@ -76,10 +80,12 @@ class DblpPaperSpider(scrapy.Spider):
             self.headers['Referer'] = tmpreferer[i % 2]
             self.headers['User-Agent'] = generate_user_agent()
             # url = 'http://dblp.uni-trier.de/search?q=' + line
-            print 'the url is', url
+            # print 'the url is', url
+            # print 'the user agent is', self.headers['User-Agent']
 
             yield Request(url, headers=self.headers,
                           meta={'paper_id': paper_id}, callback=self.parse_paper_url)
+            # print 'the user agent is', self.headers['User-Agent']
         #
         #     # sleep(2)        #休眠
 
