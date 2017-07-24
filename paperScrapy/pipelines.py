@@ -51,14 +51,7 @@ class DblpPipeline(object):
     '''
 
     dbpool = MysqlPool()
-    ccf_sql_select = "SELECT count(*) " \
-                     "FROM ccf WHERE CCF_id<10000000 AND CCF_dblpname = %s and CCF_type = 'conference'"
-    core_sql_select = "SELECT count(*) " \
-                      "FROM core WHERE CORE_id<10000000 AND CORE_dblpname = %s and CORE_type = 'conference'"
 
-    num = dbpool.getOne(core_sql_select, ('NOT IN DBLP',))
-    num = num['count(*)']
-    print 'num is ', num
     # pipeline默认调用
     def process_item(self, item, spider):
         venue_type = item["venue_type"]
@@ -67,6 +60,8 @@ class DblpPipeline(object):
             self.ccf_dblp(item)
         elif venue_type == 'CORE':
             self.core_dblp(item)
+        elif venue_type == 'MAG':
+            self.mag_dblp(item)
         else:
             print 'No this type:', venue_type
 
@@ -103,8 +98,7 @@ class DblpPipeline(object):
 
         self.dbpool.end()
         print venue_id, 'ccf is updated successful!'
-        self.num -= 1
-        print '---------- left ', self.num,'---------'
+
 
     def core_dblp(self, item):
         """
@@ -134,6 +128,23 @@ class DblpPipeline(object):
         #     sql = "update core set CORE_dblpname3 = %s where CORE_id = %s "
 
         sql = "update core set CORE_dblpname = %s where CORE_id = %s "
+        self.dbpool.update(sql, (dblp_name, venue_id))
+
+        self.dbpool.end()
+        print venue_id, ' core is updated successful!'
+
+
+    def mag_dblp(self, item):
+        """
+        存入mag表的dblp名称
+        :param item: 传递过来的内容
+        :return: 
+        """
+
+        dblp_name = item["name"].strip()    #清楚开头结尾处的空格
+        venue_id = item["venue_id"]
+        print 'save to sql:', dblp_name
+        sql = "update mag set mag_dblpname = %s where mag_id = %s "
         self.dbpool.update(sql, (dblp_name, venue_id))
 
         self.dbpool.end()

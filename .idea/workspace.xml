@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5a7068d-a812-4972-97d6-f5b054fb4750" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_jour.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/paperScrapy/spiders/dblpSpider.py" afterPath="$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_conf.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/middlewares.py" afterPath="$PROJECT_DIR$/paperScrapy/middlewares.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/pipelines.py" afterPath="$PROJECT_DIR$/paperScrapy/pipelines.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/run.py" afterPath="$PROJECT_DIR$/paperScrapy/run.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/settings.py" afterPath="$PROJECT_DIR$/paperScrapy/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/spiders/dblpPaperSpider.py" afterPath="$PROJECT_DIR$/paperScrapy/spiders/dblpPaperSpider.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/tools/Crawl_proxy.py" afterPath="$PROJECT_DIR$/paperScrapy/tools/Crawl_proxy.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_conf.py" afterPath="$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_conf.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,7 +19,7 @@
     <SUITE FILE_PATH="coverage/paperScrapy$findYear.coverage" NAME="findYear Coverage Results" MODIFIED="1495075291065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy/mysqlHandle" />
     <SUITE FILE_PATH="coverage/paperScrapy$updatePaper.coverage" NAME="updatePaper Coverage Results" MODIFIED="1495032956517" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy/mysqlHandle" />
     <SUITE FILE_PATH="coverage/paperScrapy$mygscholar.coverage" NAME="mygscholar Coverage Results" MODIFIED="1494593930102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy/tools" />
-    <SUITE FILE_PATH="coverage/paperScrapy$run.coverage" NAME="run Coverage Results" MODIFIED="1500883943733" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy" />
+    <SUITE FILE_PATH="coverage/paperScrapy$run.coverage" NAME="run Coverage Results" MODIFIED="1500906883757" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy" />
     <SUITE FILE_PATH="coverage/paperScrapy$restart.coverage" NAME="restart Coverage Results" MODIFIED="1496325123002" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy" />
     <SUITE FILE_PATH="coverage/paperScrapy$mysqlpool.coverage" NAME="mysqlpool Coverage Results" MODIFIED="1493210799278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy" />
   </component>
@@ -50,7 +43,7 @@
         <entry file="file://$PROJECT_DIR$/paperScrapy/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="304">
-              <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+              <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -59,23 +52,22 @@
       <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/paperScrapy/pipelines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="63" column="39" lean-forward="true" selection-start-line="63" selection-start-column="39" selection-end-line="63" selection-end-column="39" />
+            <state relative-caret-position="252">
+              <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
               <folding>
-                <marker date="1500883943554" expanded="true" signature="928:1192" ph="UPDATE paper... " />
-                <marker date="1500883943554" expanded="true" signature="1906:2028" ph="SELECT count... ccf" />
-                <marker date="1500883943554" expanded="true" signature="2053:2180" ph="SELECT count... core" />
-                <marker date="1500883943554" expanded="true" signature="2842:2946" ph="SELECT CCF_d... ccf" />
-                <marker date="1500883943554" expanded="true" signature="3441:3492" ph="update ccf s... " />
-                <marker date="1500883943554" expanded="true" signature="3532:3583" ph="update ccf s... " />
-                <marker date="1500883943554" expanded="true" signature="3602:3652" ph="update ccf s... " />
-                <marker date="1500883943554" expanded="true" signature="4146:4255" ph="SELECT CORE_... core" />
-                <marker date="1500883943554" expanded="true" signature="4645:4698" ph="update core " />
-                <marker date="1500883943554" expanded="true" signature="4761:4815" ph="update core " />
-                <marker date="1500883943554" expanded="true" signature="4855:4909" ph="update core " />
-                <marker date="1500883943554" expanded="true" signature="4928:4981" ph="update core " />
-                <marker date="1500883943554" expanded="true" signature="5606:5745" ph="update targe... " />
-                <marker date="1500883943554" expanded="true" signature="5841:5946" ph="update targe... " />
+                <marker date="1500906416323" expanded="true" signature="928:1192" ph="UPDATE paper... " />
+                <marker date="1500906416323" expanded="true" signature="2500:2604" ph="SELECT CCF_d... ccf" />
+                <marker date="1500906416323" expanded="true" signature="3099:3150" ph="update ccf s... " />
+                <marker date="1500906416323" expanded="true" signature="3190:3241" ph="update ccf s... " />
+                <marker date="1500906416323" expanded="true" signature="3260:3310" ph="update ccf s... " />
+                <marker date="1500906416323" expanded="true" signature="3728:3837" ph="SELECT CORE_... core" />
+                <marker date="1500906416323" expanded="true" signature="4227:4280" ph="update core " />
+                <marker date="1500906416323" expanded="true" signature="4343:4397" ph="update core " />
+                <marker date="1500906416323" expanded="true" signature="4437:4491" ph="update core " />
+                <marker date="1500906416323" expanded="true" signature="4510:4563" ph="update core " />
+                <marker date="1500906416323" expanded="true" signature="4976:5026" ph="update core " />
+                <marker date="1500906416323" expanded="true" signature="5651:5790" ph="update targe... " />
+                <marker date="1500906416323" expanded="true" signature="5886:5991" ph="update targe... " />
               </folding>
             </state>
           </provider>
@@ -84,12 +76,13 @@
       <file leaf-file-name="dblpSpider_conf.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_conf.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="803">
-              <caret line="81" column="48" lean-forward="false" selection-start-line="81" selection-start-column="48" selection-end-line="81" selection-end-column="48" />
+            <state relative-caret-position="203">
+              <caret line="65" column="34" lean-forward="true" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
               <folding>
                 <element signature="e#24#46#0" expanded="true" />
-                <marker date="1500883707100" expanded="true" signature="1333:1477" ph="SELECT CCF_i... ccf" />
-                <marker date="1500883707100" expanded="true" signature="1615:1766" ph="SELECT CORE_... core" />
+                <marker date="1500906756025" expanded="true" signature="1333:1477" ph="SELECT CCF_i... ccf" />
+                <marker date="1500906756025" expanded="true" signature="1607:1758" ph="SELECT CORE_... core" />
+                <marker date="1500906756025" expanded="true" signature="1896:1997" ph="SELECT MAG_i... mag" />
               </folding>
             </state>
           </provider>
@@ -99,7 +92,7 @@
         <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_jour.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
-              <caret line="43" column="66" lean-forward="true" selection-start-line="43" selection-start-column="50" selection-end-line="43" selection-end-column="66" />
+              <caret line="43" column="66" lean-forward="false" selection-start-line="43" selection-start-column="50" selection-end-line="43" selection-end-column="66" />
               <folding>
                 <marker date="1500727776716" expanded="true" signature="1322:1445" ph="SELECT CCF_i... ccf" />
                 <marker date="1500727776716" expanded="true" signature="1583:1712" ph="SELECT CORE_... core" />
@@ -112,7 +105,7 @@
         <entry file="file://$PROJECT_DIR$/paperScrapy/tools/Crawl_proxy.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1285">
-              <caret line="199" column="48" lean-forward="true" selection-start-line="199" selection-start-column="48" selection-end-line="199" selection-end-column="48" />
+              <caret line="199" column="48" lean-forward="false" selection-start-line="199" selection-start-column="48" selection-end-line="199" selection-end-column="48" />
               <folding>
                 <marker date="1495712664965" expanded="true" signature="11536:11568" ph="select proxi... proxies" />
                 <marker date="1495712664965" expanded="true" signature="11952:12034" ph="INSERT INTO proxies... " />
@@ -136,7 +129,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>wt</find>
       <find>outfo</find>
       <find>a href=</find>
       <find>/scholar.bib?</find>
@@ -166,6 +158,7 @@
       <find>not</find>
       <find>ISAV @ SC</find>
       <find>__query</find>
+      <find>mdm</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -195,8 +188,8 @@
         <option value="$PROJECT_DIR$/paperScrapy/run.py" />
         <option value="$PROJECT_DIR$/paperScrapy/middlewares.py" />
         <option value="$PROJECT_DIR$/paperScrapy/settings.py" />
-        <option value="$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_conf.py" />
         <option value="$PROJECT_DIR$/paperScrapy/pipelines.py" />
+        <option value="$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_conf.py" />
       </list>
     </option>
   </component>
@@ -619,7 +612,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34554973" sideWeight="0.5028777" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30890054" sideWeight="0.4971223" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42146596" sideWeight="0.4971223" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -956,7 +949,7 @@
     <entry file="file://$PROJECT_DIR$/paperScrapy/tools/Crawl_proxy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1285">
-          <caret line="199" column="48" lean-forward="true" selection-start-line="199" selection-start-column="48" selection-end-line="199" selection-end-column="48" />
+          <caret line="199" column="48" lean-forward="false" selection-start-line="199" selection-start-column="48" selection-end-line="199" selection-end-column="48" />
           <folding>
             <marker date="1495712664965" expanded="true" signature="11536:11568" ph="select proxi... proxies" />
             <marker date="1495712664965" expanded="true" signature="11952:12034" ph="INSERT INTO proxies... " />
@@ -1004,7 +997,7 @@
     <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_jour.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
-          <caret line="43" column="66" lean-forward="true" selection-start-line="43" selection-start-column="50" selection-end-line="43" selection-end-column="66" />
+          <caret line="43" column="66" lean-forward="false" selection-start-line="43" selection-start-column="50" selection-end-line="43" selection-end-column="66" />
           <folding>
             <marker date="1500727776716" expanded="true" signature="1322:1445" ph="SELECT CCF_i... ccf" />
             <marker date="1500727776716" expanded="true" signature="1583:1712" ph="SELECT CORE_... core" />
@@ -1015,42 +1008,42 @@
     <entry file="file://$PROJECT_DIR$/paperScrapy/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
-          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/paperScrapy/pipelines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="63" column="39" lean-forward="true" selection-start-line="63" selection-start-column="39" selection-end-line="63" selection-end-column="39" />
+        <state relative-caret-position="252">
+          <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
           <folding>
-            <marker date="1500883943554" expanded="true" signature="928:1192" ph="UPDATE paper... " />
-            <marker date="1500883943554" expanded="true" signature="1906:2028" ph="SELECT count... ccf" />
-            <marker date="1500883943554" expanded="true" signature="2053:2180" ph="SELECT count... core" />
-            <marker date="1500883943554" expanded="true" signature="2842:2946" ph="SELECT CCF_d... ccf" />
-            <marker date="1500883943554" expanded="true" signature="3441:3492" ph="update ccf s... " />
-            <marker date="1500883943554" expanded="true" signature="3532:3583" ph="update ccf s... " />
-            <marker date="1500883943554" expanded="true" signature="3602:3652" ph="update ccf s... " />
-            <marker date="1500883943554" expanded="true" signature="4146:4255" ph="SELECT CORE_... core" />
-            <marker date="1500883943554" expanded="true" signature="4645:4698" ph="update core " />
-            <marker date="1500883943554" expanded="true" signature="4761:4815" ph="update core " />
-            <marker date="1500883943554" expanded="true" signature="4855:4909" ph="update core " />
-            <marker date="1500883943554" expanded="true" signature="4928:4981" ph="update core " />
-            <marker date="1500883943554" expanded="true" signature="5606:5745" ph="update targe... " />
-            <marker date="1500883943554" expanded="true" signature="5841:5946" ph="update targe... " />
+            <marker date="1500906416323" expanded="true" signature="928:1192" ph="UPDATE paper... " />
+            <marker date="1500906416323" expanded="true" signature="2500:2604" ph="SELECT CCF_d... ccf" />
+            <marker date="1500906416323" expanded="true" signature="3099:3150" ph="update ccf s... " />
+            <marker date="1500906416323" expanded="true" signature="3190:3241" ph="update ccf s... " />
+            <marker date="1500906416323" expanded="true" signature="3260:3310" ph="update ccf s... " />
+            <marker date="1500906416323" expanded="true" signature="3728:3837" ph="SELECT CORE_... core" />
+            <marker date="1500906416323" expanded="true" signature="4227:4280" ph="update core " />
+            <marker date="1500906416323" expanded="true" signature="4343:4397" ph="update core " />
+            <marker date="1500906416323" expanded="true" signature="4437:4491" ph="update core " />
+            <marker date="1500906416323" expanded="true" signature="4510:4563" ph="update core " />
+            <marker date="1500906416323" expanded="true" signature="4976:5026" ph="update core " />
+            <marker date="1500906416323" expanded="true" signature="5651:5790" ph="update targe... " />
+            <marker date="1500906416323" expanded="true" signature="5886:5991" ph="update targe... " />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_conf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="803">
-          <caret line="81" column="48" lean-forward="false" selection-start-line="81" selection-start-column="48" selection-end-line="81" selection-end-column="48" />
+        <state relative-caret-position="203">
+          <caret line="65" column="34" lean-forward="true" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
           <folding>
             <element signature="e#24#46#0" expanded="true" />
-            <marker date="1500883707100" expanded="true" signature="1333:1477" ph="SELECT CCF_i... ccf" />
-            <marker date="1500883707100" expanded="true" signature="1615:1766" ph="SELECT CORE_... core" />
+            <marker date="1500906756025" expanded="true" signature="1333:1477" ph="SELECT CCF_i... ccf" />
+            <marker date="1500906756025" expanded="true" signature="1607:1758" ph="SELECT CORE_... core" />
+            <marker date="1500906756025" expanded="true" signature="1896:1997" ph="SELECT MAG_i... mag" />
           </folding>
         </state>
       </provider>

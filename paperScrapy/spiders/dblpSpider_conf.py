@@ -43,7 +43,7 @@ class DblpSpider(scrapy.Spider):
     ccf_sql_select = "SELECT CCF_id, CCF_name, CCF_abbreviation " \
                  "FROM ccf WHERE CCF_id<10000000 AND CCF_dblpname = %s and CCF_type = 'conference'"
 
-    ccf_venue_set = mypool.getAll(ccf_sql_select, ("NOT IN DBLP",))  # 记录所有待查询的venue集合
+    ccf_venue_set = mypool.getAll(ccf_sql_select, ("MDM",))  # 记录所有待查询的venue集合
 
     #  查询core中为进行dblp匹配
     core_sql_select = "SELECT CORE_id, CORE_name, CORE_abbreviation " \
@@ -51,42 +51,51 @@ class DblpSpider(scrapy.Spider):
 
     core_venue_set = mypool.getAll(core_sql_select, ("NOT IN DBLP",))  # 记录所有待查询的venue集合
 
+    #  查询mag中为进行dblp匹配
+    mag_sql_select = "SELECT MAG_id, MAG_name, MAG_abbreviation " \
+                      "FROM mag WHERE mag_dblpname = %s "
+
+    mag_venue_set = mypool.getAll(mag_sql_select, ("NOT IN DBLP",))  # 记录所有待查询的venue集合
+    #
     # 获取初始request
     def start_requests(self):
 
+        venue_type = 'CCF'
+        if venue_type == 'CCF':
+            target_set = self.ccf_venue_set
+        elif venue_type == 'CORE':
+            target_set = self.core_venue_set
+        elif venue_type == 'MAG':
+            target_set = self.mag_venue_set
+        else:
+            print 'The type does not exit!!!'
+            return
 
-        # for i in range(len(self.ccf_venue_set)):
-        #
-        #     # 从CCF集合中取出
-        #     #venue_name = self.ccf_venue_set[i]["CCF_name"]
-        #     venue_name = self.ccf_venue_set[i]["CCF_abbreviation"]
-        #     venue_id = self.ccf_venue_set[i]["CCF_id"]
-        #     line = venue_name.replace("%", "%25").replace(" ", "%20").replace(",", "%2C")\
-        #         .replace(":", "%3A").replace("?", "%3F").replace("&", "%26").replace("'", "%27")
-        #     url = 'http://dblp.uni-trier.de/search?q=' + line
-        #
-        #     # 通过meta传递参数venue_id、venue_type，方便后续的数据库存取
-        #     venue_type = 'CCF'
-        #     yield Request(url, headers=self.headers,
-        #                   meta={'venue_id': venue_id, 'venue_type': venue_type},
-        #                   callback=self.parse_venue)
-        #     sleep(2)        #休眠
+        # for i in range(len(target_set)-1, -1, -1):
+        num = len(target_set)
+        print 'the total num is', num
+        for i in range(len(target_set)):
 
-        for i in range(len(self.core_venue_set)):
-            # 从Core集合中取出
-            venue_name = self.core_venue_set[i]["CORE_name"]
-            # venue_name = self.ccf_venue_set[i]["CCF_abbreviation"]
-            venue_id = self.core_venue_set[i]["CORE_id"]
+            # 从集合中取出
+
+            vid = venue_type + '_id'
+            vname = venue_type + '_name'
+            # vname = venue_type + '_abbreviation'
+
+            venue_id = target_set[i][vid]
+            venue_name = target_set[i][vname]
+
             line = venue_name.replace("%", "%25").replace(" ", "%20").replace(",", "%2C")\
                 .replace(":", "%3A").replace("?", "%3F").replace("&", "%26").replace("'", "%27")
             url = 'http://dblp.uni-trier.de/search?q=' + line
 
             # 通过meta传递参数venue_id、venue_type，方便后续的数据库存取
-            venue_type = 'CORE'
+
             yield Request(url, headers=self.headers,
-                          meta={'venue_id': venue_id, 'venue_type': venue_type}, callback=self.parse_venue)
-        #
-        #     # sleep(2)        #休眠
+                          meta={'venue_id': venue_id, 'venue_type': venue_type},
+                          callback=self.parse_venue)
+            num -= 1
+            print '-------- left', num, '-----------'
 
     def parse_venue(self, response):
         """
