@@ -9,7 +9,7 @@ import random
 import json
 import time
 import requests
-from paperScrapy.tools.mysqlpool import MysqlPool
+from mysqlpool import MysqlPool
 
 
 class Proxies(object):
@@ -114,14 +114,14 @@ class Proxies(object):
         page = 1
         page_stop = 11#page + self.page
         while page < page_stop:
-            url = 'http://www.kuaidaili.com/proxylist/%d/' % page # 普通代理
+            url = 'http://www.kuaidaili.com/free/inha/%d/' % page # 普通代理
             # url = 'http://www.kuaidaili.com/free/outha/%d/' % page   # 国外代理
             try:
 
-                html = requests.get(url, headers=self.headers).content
+                html = requests.get(url, headers=self.headers, timeout=7).content
                 soup = BeautifulSoup(html, 'lxml')
-                ip_list = soup.find(id='index_free_list') # proxylist
-                # ip_list = soup.find(id='list') # 国外代理
+                # ip_list = soup.find(id='index_free_list') # proxylist
+                ip_list = soup.find(id='list') # free代理
                 # print ip_list
                 tr = ip_list.find_all('tr')
                 # print tr
@@ -133,8 +133,8 @@ class Proxies(object):
                     pro_list = pro_list.split(',')
                     for pro_tmp in pro_list:
                         pro_tmp = pro_tmp.strip().lower() + '://'
-                        # self.proxies.append(pro_tmp + ip_tmp + ':' + port_tmp)
-                        self.proxies.append('https://' + ip_tmp + ':' + port_tmp)
+                        self.proxies.append(pro_tmp + ip_tmp + ':' + port_tmp)
+                        # self.proxies.append('http://' + ip_tmp + ':' + port_tmp)
                         # print 'lianjie----------->', pro_tmp + ip_tmp + ':' + port_tmp
             except Exception, e:
                 print e.args[0]
@@ -142,43 +142,44 @@ class Proxies(object):
             print '---------完成页码----------', page
             page += 1
 
-    # ---------------proxy360------------------
+    # ---------------66ip------------------
 
-    def get_proxies_proxy360(self):
+    def get_proxies_66ip(self):
         # page = random.randint(1, 10)
-        print'爬取--proxy360--中'
+        print'爬取--ip66--中'
         page = 1
         page_stop = 2  # page + self.page
         while page < page_stop:
-            url = 'http://www.proxy360.cn/default.aspx'
+            url = 'http://www.66ip.cn/mo.php?sxb=&tqsl=100&port=&export=&ktip=&sxa=&submit=%CC%E1++%C8%A1&textarea='
             try:
 
                 html = requests.get(url, headers=self.headers).content
-                soup = BeautifulSoup(html, 'lxml')
-                ip_list = soup.find(id='ctl00_ContentPlaceHolder1_upProjectList')
-                tr = ip_list.find_all('div', class_='proxylistitem')
-                for i in range(1, len(tr)):
-                    ip_tmp = tr[i].find_all('span')[0].get_text().strip()
-                    port_tmp = tr[i].find_all('span')[1].get_text().strip()
-                    pro_list = ['http', 'https']
-                    for pro_tmp in pro_list:
-                        pro_tmp = pro_tmp.strip().lower() + '://'
-                        self.proxies.append(pro_tmp + ip_tmp + ':' + port_tmp)
-                        # print 'lianjie----------->', pro_tmp + ip_tmp + ':' + port_tmp
+                # print html
+                tmp = html.split('<br />')
+                # print 'the len of tmp is', len(tmp)
+                ip_tmp = []
+                ip_tmp.append(tmp[0].split('\t')[-1])
+                for i in xrange(1, len(tmp)-1):         #
+                    ip_tmp.append(tmp[i].strip())
+
+                for ip in ip_tmp:
+                    pro_tmp = 'http://'
+                    self.proxies.append(pro_tmp + ip)
+                    # print 'lianjie----------->', pro_tmp + ip
             except:
                 print '---------解析存在问题--------------'
             print '---------完成页码----------', page
             page += 1
 
     # ---------------------------------------------
-    # goubanjia 代理
-    def get_proxies_goubanjia(self):
+    # mimvp 代理
+    def get_proxies_mimvp(self):
         # page = random.randint(1, 10)
         print'爬取--全网代理ip--中'
         page = 1
-        page_stop = 21#page + self.page
+        page_stop = 11#page + self.page
         while page < page_stop:
-            url = 'http://www.goubanjia.com/free/index%d.shtml' % page
+            url = 'http://www.goubanjia.com/free/gngn/index%d.shtml' % page
             try:
                 html = requests.get(url, headers=self.headers).content
                 soup = BeautifulSoup(html, 'lxml')
@@ -218,25 +219,23 @@ class Proxies(object):
         page = 1
         page_stop = 2  # page + self.page
         while page < page_stop:
-            url = 'http://www.xdaili.cn/freeproxy.html'
+            url = 'http://www.xdaili.cn/ipagent//freeip/getFreeIps?page=1&rows=10'
             try:
                 html = requests.get(url, headers=self.headers).content
-                soup = BeautifulSoup(html, 'lxml')
-                ip_list = soup.find(id='table1')
-                tr = ip_list.find_all('tr')
-                # print 'tr', tr[0]
-                for i in range(1, len(tr)):
-                    ip_tmp = tr[i].find_all('td')[0].get_text().strip()
-                    port_tmp = tr[i].find_all('td')[1].get_text().strip()
-                    pro_list = tr[i].find_all('td')[3].get_text()
-                    pro_list = pro_list.split('/')
-                    for pro_tmp in pro_list:
-
-                        pro_tmp = pro_tmp.strip().lower() + '://'
-                        self.proxies.append(pro_tmp + ip_tmp + ':' + port_tmp)
-                            # print 'lianjie----------->', pro_tmp + ip_tmp
-            except:
+                datas = eval(html)
+                # print html['rows']
+                for data in datas['rows']:
+                    # print data
+                    tmp_ip = data['ip']
+                    tmp_port = data['port']
+                    # temp_type = data['type']
+                    # print item
+                    self.proxies.append('http://' + tmp_ip + ':' + tmp_port)
+                    self.proxies.append('https://' + tmp_ip + ':' + tmp_port)
+                    # print 'the url is ', 'https://' + tmp_ip + ':' + tmp_port
+            except Exception,e:
                 print '---------解析存在问题--------------'
+                print e.args
             print '---------完成页码----------', page
             page += 1
 
@@ -348,11 +347,11 @@ class Proxies(object):
         print '------------生成-----------'
         # self.get_proxies_nn()  # 高匿
         self.proxies = []
-        self.get_proxies_proxy360()
+        self.get_proxies_66ip()
         self.get_proxies_xdaili()
-        self.get_proxies_wt()           # xicidali--http
+        # self.get_proxies_wt()           # xicidali--http
         self.get_proxies_kuaidaili()
-        self.get_proxies_goubanjia()
+        # self.get_proxies_goubanjia()     # 失效
 
         print '获取未检测ip个数:', len(self.proxies)
 

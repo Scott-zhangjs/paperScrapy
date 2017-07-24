@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e5a7068d-a812-4972-97d6-f5b054fb4750" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_jour.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/paperScrapy/spiders/dblpSpider.py" afterPath="$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_conf.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/middlewares.py" afterPath="$PROJECT_DIR$/paperScrapy/middlewares.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/pipelines.py" afterPath="$PROJECT_DIR$/paperScrapy/pipelines.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/run.py" afterPath="$PROJECT_DIR$/paperScrapy/run.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/settings.py" afterPath="$PROJECT_DIR$/paperScrapy/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/paperScrapy/spiders/dblpPaperSpider.py" afterPath="$PROJECT_DIR$/paperScrapy/spiders/dblpPaperSpider.py" />
@@ -17,64 +20,89 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/paperScrapy$Unittests_in_restart_py.coverage" NAME="Unittests in restart.py Coverage Results" MODIFIED="1496318678898" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/paperScrapy$dbhelper.coverage" NAME="dbhelper Coverage Results" MODIFIED="1493177565619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy" />
-    <SUITE FILE_PATH="coverage/paperScrapy$Crawl_proxy.coverage" NAME="Crawl_proxy Coverage Results" MODIFIED="1495590260893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy/tools" />
+    <SUITE FILE_PATH="coverage/paperScrapy$Crawl_proxy.coverage" NAME="Crawl_proxy Coverage Results" MODIFIED="1500877424561" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy/tools" />
     <SUITE FILE_PATH="coverage/paperScrapy$findYear.coverage" NAME="findYear Coverage Results" MODIFIED="1495075291065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy/mysqlHandle" />
     <SUITE FILE_PATH="coverage/paperScrapy$updatePaper.coverage" NAME="updatePaper Coverage Results" MODIFIED="1495032956517" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy/mysqlHandle" />
     <SUITE FILE_PATH="coverage/paperScrapy$mygscholar.coverage" NAME="mygscholar Coverage Results" MODIFIED="1494593930102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy/tools" />
-    <SUITE FILE_PATH="coverage/paperScrapy$run.coverage" NAME="run Coverage Results" MODIFIED="1495591163936" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy" />
+    <SUITE FILE_PATH="coverage/paperScrapy$run.coverage" NAME="run Coverage Results" MODIFIED="1500883943733" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy" />
+    <SUITE FILE_PATH="coverage/paperScrapy$restart.coverage" NAME="restart Coverage Results" MODIFIED="1496325123002" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy" />
     <SUITE FILE_PATH="coverage/paperScrapy$mysqlpool.coverage" NAME="mysqlpool Coverage Results" MODIFIED="1493210799278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/paperScrapy" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="mysqlpool.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/paperScrapy/tools/mysqlpool.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="139" column="15" lean-forward="false" selection-start-line="139" selection-start-column="8" selection-end-line="139" selection-end-column="15" />
+              <folding>
+                <element signature="e#198#212#0" expanded="true" />
+                <marker date="1493210799243" expanded="true" signature="5247:5373" ph="SELECT CCF_i... ccf" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/paperScrapy/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="194">
-              <caret line="39" column="18" lean-forward="false" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+            <state relative-caret-position="304">
+              <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="middlewares.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/paperScrapy/middlewares.py">
+      <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/paperScrapy/pipelines.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="247" column="0" lean-forward="true" selection-start-line="247" selection-start-column="0" selection-end-line="247" selection-end-column="0" />
+            <state relative-caret-position="224">
+              <caret line="63" column="39" lean-forward="true" selection-start-line="63" selection-start-column="39" selection-end-line="63" selection-end-column="39" />
               <folding>
-                <element signature="e#167#176#0" expanded="true" />
-                <marker date="1495591163893" expanded="true" signature="6724:6807" ph="select proxi... proxies" />
-                <marker date="1495591163893" expanded="true" signature="7267:7351" ph="select proxi... proxies" />
+                <marker date="1500883943554" expanded="true" signature="928:1192" ph="UPDATE paper... " />
+                <marker date="1500883943554" expanded="true" signature="1906:2028" ph="SELECT count... ccf" />
+                <marker date="1500883943554" expanded="true" signature="2053:2180" ph="SELECT count... core" />
+                <marker date="1500883943554" expanded="true" signature="2842:2946" ph="SELECT CCF_d... ccf" />
+                <marker date="1500883943554" expanded="true" signature="3441:3492" ph="update ccf s... " />
+                <marker date="1500883943554" expanded="true" signature="3532:3583" ph="update ccf s... " />
+                <marker date="1500883943554" expanded="true" signature="3602:3652" ph="update ccf s... " />
+                <marker date="1500883943554" expanded="true" signature="4146:4255" ph="SELECT CORE_... core" />
+                <marker date="1500883943554" expanded="true" signature="4645:4698" ph="update core " />
+                <marker date="1500883943554" expanded="true" signature="4761:4815" ph="update core " />
+                <marker date="1500883943554" expanded="true" signature="4855:4909" ph="update core " />
+                <marker date="1500883943554" expanded="true" signature="4928:4981" ph="update core " />
+                <marker date="1500883943554" expanded="true" signature="5606:5745" ph="update targe... " />
+                <marker date="1500883943554" expanded="true" signature="5841:5946" ph="update targe... " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="run.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/paperScrapy/run.py">
+      <file leaf-file-name="dblpSpider_conf.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_conf.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="14" column="9" lean-forward="true" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
-              <folding>
-                <element signature="e#33#42#0" expanded="true" />
-                <marker date="1495591677977" expanded="true" signature="534:666" ph="SELECT targe... targetpaper" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dblpPaperSpider.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpPaperSpider.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+            <state relative-caret-position="803">
+              <caret line="81" column="48" lean-forward="false" selection-start-line="81" selection-start-column="48" selection-end-line="81" selection-end-column="48" />
               <folding>
                 <element signature="e#24#46#0" expanded="true" />
-                <marker date="1495591638641" expanded="true" signature="1439:1573" ph="SELECT targe... targetpaper" />
-                <marker date="1495591638641" expanded="true" signature="1439:1601" ph="SELECT targe... targetpaper" />
-                <marker date="1495591638641" expanded="true" signature="1439:1664" ph="SELECT targe... targetpaper" />
+                <marker date="1500883707100" expanded="true" signature="1333:1477" ph="SELECT CCF_i... ccf" />
+                <marker date="1500883707100" expanded="true" signature="1615:1766" ph="SELECT CORE_... core" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dblpSpider_jour.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_jour.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="43" column="66" lean-forward="true" selection-start-line="43" selection-start-column="50" selection-end-line="43" selection-end-column="66" />
+              <folding>
+                <marker date="1500727776716" expanded="true" signature="1322:1445" ph="SELECT CCF_i... ccf" />
+                <marker date="1500727776716" expanded="true" signature="1583:1712" ph="SELECT CORE_... core" />
               </folding>
             </state>
           </provider>
@@ -83,15 +111,14 @@
       <file leaf-file-name="Crawl_proxy.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/paperScrapy/tools/Crawl_proxy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="19" column="31" lean-forward="false" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="31" />
+            <state relative-caret-position="-1285">
+              <caret line="199" column="48" lean-forward="true" selection-start-line="199" selection-start-column="48" selection-end-line="199" selection-end-column="48" />
               <folding>
-                <marker date="1495590776152" expanded="true" signature="11850:11882" ph="select proxi... proxies" />
-                <marker date="1495590776152" expanded="true" signature="12266:12348" ph="INSERT INTO proxies... " />
-                <marker date="1495590776152" expanded="true" signature="12277:12348" ph="insert into proxies... " />
-                <marker date="1495590776152" expanded="true" signature="12570:12602" ph="select proxi... proxies" />
-                <marker date="1495590776152" expanded="true" signature="12905:12937" ph="select proxi... proxies" />
-                <marker date="1495590776152" expanded="true" signature="13174:13217" ph="delete from " />
+                <marker date="1495712664965" expanded="true" signature="11536:11568" ph="select proxi... proxies" />
+                <marker date="1495712664965" expanded="true" signature="11952:12034" ph="INSERT INTO proxies... " />
+                <marker date="1495712664965" expanded="true" signature="12256:12288" ph="select proxi... proxies" />
+                <marker date="1495712664965" expanded="true" signature="12591:12623" ph="select proxi... proxies" />
+                <marker date="1495712664965" expanded="true" signature="12860:12903" ph="delete from " />
               </folding>
             </state>
           </provider>
@@ -103,20 +130,12 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="Jupyter Notebook" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>g4.z</find>
-      <find>schedul</find>
-      <find>greedy</find>
-      <find>PHOTON</find>
-      <find>repla</find>
-      <find>failed</find>
-      <find>chec</find>
-      <find>sc</find>
-      <find>kuaid</find>
       <find>wt</find>
       <find>outfo</find>
       <find>a href=</find>
@@ -138,6 +157,15 @@
       <find>icmlc</find>
       <find>cookie</find>
       <find>ver</find>
+      <find>div</find>
+      <find>wa</find>
+      <find>kill</find>
+      <find>is running</find>
+      <find>running</find>
+      <find>creator</find>
+      <find>not</find>
+      <find>ISAV @ SC</find>
+      <find>__query</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -158,13 +186,17 @@
         <option value="$PROJECT_DIR$/paperScrapy/tools/dbhelper.py" />
         <option value="$PROJECT_DIR$/paperScrapy/mysqlHandle/findYear.py" />
         <option value="$PROJECT_DIR$/paperScrapy/items.py" />
-        <option value="$PROJECT_DIR$/paperScrapy/pipelines.py" />
         <option value="$PROJECT_DIR$/paperScrapy/mysqlHandle/updatePaper.py" />
         <option value="$PROJECT_DIR$/paperScrapy/tools/Crawl_proxy.py" />
-        <option value="$PROJECT_DIR$/paperScrapy/settings.py" />
-        <option value="$PROJECT_DIR$/paperScrapy/middlewares.py" />
+        <option value="$PROJECT_DIR$/paperScrapy/restart.py" />
+        <option value="$PROJECT_DIR$/paperScrapy/tools/test.ipynb" />
+        <option value="$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_jour.py" />
         <option value="$PROJECT_DIR$/paperScrapy/spiders/dblpPaperSpider.py" />
         <option value="$PROJECT_DIR$/paperScrapy/run.py" />
+        <option value="$PROJECT_DIR$/paperScrapy/middlewares.py" />
+        <option value="$PROJECT_DIR$/paperScrapy/settings.py" />
+        <option value="$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_conf.py" />
+        <option value="$PROJECT_DIR$/paperScrapy/pipelines.py" />
       </list>
     </option>
   </component>
@@ -194,8 +226,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -236,7 +268,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="tools" />
+              <option name="myItemId" value="spiders" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -251,11 +283,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/paperScrapy/spiders" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/paperScrapy/tools" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/paperScrapy/spiders" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -309,25 +341,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="mygscholar" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/paperScrapy/tools" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="paperScrapy" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/paperScrapy/tools/mygscholar.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
     <configuration default="false" name="updatePaper" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -364,6 +377,23 @@
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="restart.py" type="tests" factoryName="Unittests" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="/usr/bin/python2.7" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="paperScrapy" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="_new_pattern" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/paperScrapy/restart.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
@@ -514,20 +544,40 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
-    <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.run" />
-      <item index="1" class="java.lang.String" itemvalue="Python.Crawl_proxy" />
-      <item index="2" class="java.lang.String" itemvalue="Python.mygscholar" />
+    <configuration default="false" name="restart" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python2.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/paperScrapy" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="paperScrapy" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/paperScrapy/restart.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <list size="6">
+      <item index="0" class="java.lang.String" itemvalue="Python.restart" />
+      <item index="1" class="java.lang.String" itemvalue="Python.run" />
+      <item index="2" class="java.lang.String" itemvalue="Python.Crawl_proxy" />
       <item index="3" class="java.lang.String" itemvalue="Python.updatePaper" />
       <item index="4" class="java.lang.String" itemvalue="Python.findYear" />
+      <item index="5" class="java.lang.String" itemvalue="Python tests.restart.py" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.run" />
         <item index="1" class="java.lang.String" itemvalue="Python.Crawl_proxy" />
-        <item index="2" class="java.lang.String" itemvalue="Python.findYear" />
-        <item index="3" class="java.lang.String" itemvalue="Python.updatePaper" />
-        <item index="4" class="java.lang.String" itemvalue="Python.mygscholar" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.restart.py" />
+        <item index="3" class="java.lang.String" itemvalue="Python.findYear" />
+        <item index="4" class="java.lang.String" itemvalue="Python.updatePaper" />
       </list>
     </recent_temporary>
   </component>
@@ -544,6 +594,14 @@
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="Unittests_in_restart_py - 2017.06.01 at 20h 04m 25s.xml">
+      <configuration name="Unittests in restart.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_restart_py - 2017.06.01 at 20h 04m 38s.xml">
+      <configuration name="Unittests in restart.py" configurationId="tests" />
+    </history-entry>
+  </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
@@ -557,11 +615,11 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19640288" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2618705" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34554973" sideWeight="0.5028777" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32460734" sideWeight="0.4971223" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30890054" sideWeight="0.4971223" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -598,50 +656,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpSpider.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="49" lean-forward="false" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
-          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="28" lean-forward="true" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpSpider.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="532">
-          <caret line="28" column="20" lean-forward="true" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="28" lean-forward="false" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/paperScrapy/pipelines.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
@@ -656,7 +670,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpSpider.py">
+    <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_jour.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
@@ -706,7 +720,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpSpider.py">
+    <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_jour.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
           <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
@@ -827,24 +841,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/tools/dbhelper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="65" column="44" lean-forward="true" selection-start-line="64" selection-start-column="8" selection-end-line="65" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/googlePaperSpider.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1254">
           <caret line="205" column="38" lean-forward="false" selection-start-line="205" selection-start-column="35" selection-end-line="205" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.local/lib/python2.7/site-packages/MySQLdb/connections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -862,18 +862,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpSpider.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1501">
-          <caret line="92" column="61" lean-forward="true" selection-start-line="92" selection-start-column="61" selection-end-line="92" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python2.7/dist-packages/scrapy/item.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="58" column="0" lean-forward="false" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -881,24 +873,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
           <caret line="37" column="4" lean-forward="false" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="552">
-          <caret line="156" column="32" lean-forward="false" selection-start-line="156" selection-start-column="32" selection-end-line="156" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/tools/mysqlpool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="30" column="8" lean-forward="false" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
-          <folding>
-            <marker date="1493210799243" expanded="true" signature="5247:5373" ph="SELECT CCF_i... ccf" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -916,50 +890,79 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/tools/Crawl_proxy.py">
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/scrapy/core/downloader/handlers/http11.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="19" column="31" lean-forward="false" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="31" />
+        <state relative-caret-position="151">
+          <caret line="305" column="0" lean-forward="false" selection-start-line="305" selection-start-column="0" selection-end-line="305" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/paperScrapy/tools/test.ipynb" />
+    <entry file="file://$PROJECT_DIR$/paperScrapy/restart.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="817">
+          <caret line="43" column="0" lean-forward="false" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding>
-            <marker date="1495590776152" expanded="true" signature="11850:11882" ph="select proxi... proxies" />
-            <marker date="1495590776152" expanded="true" signature="12266:12348" ph="INSERT INTO proxies... " />
-            <marker date="1495590776152" expanded="true" signature="12277:12348" ph="insert into proxies... " />
-            <marker date="1495590776152" expanded="true" signature="12570:12602" ph="select proxi... proxies" />
-            <marker date="1495590776152" expanded="true" signature="12905:12937" ph="select proxi... proxies" />
-            <marker date="1495590776152" expanded="true" signature="13174:13217" ph="delete from " />
+            <element signature="e#0#22#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/settings.py">
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/scrapy/crawler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="39" column="18" lean-forward="false" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+        <state relative-caret-position="209">
+          <caret line="30" column="34" lean-forward="false" selection-start-line="30" selection-start-column="34" selection-end-line="30" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/paperScrapy/middlewares.py">
+    <entry file="file:///usr/local/lib/python2.7/dist-packages/DBUtils/PooledDB.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="247" column="0" lean-forward="true" selection-start-line="247" selection-start-column="0" selection-end-line="247" selection-end-column="0" />
+        <state relative-caret-position="-688">
+          <caret line="227" column="49" lean-forward="true" selection-start-line="227" selection-start-column="49" selection-end-line="227" selection-end-column="49" />
           <folding>
-            <element signature="e#167#176#0" expanded="true" />
-            <marker date="1495591163893" expanded="true" signature="6724:6807" ph="select proxi... proxies" />
-            <marker date="1495591163893" expanded="true" signature="7267:7351" ph="select proxi... proxies" />
+            <element signature="e#6323#6354#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.local/lib/python2.7/site-packages/MySQLdb/connections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpPaperSpider.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
-          <caret line="46" column="0" lean-forward="true" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <caret line="11" column="1" lean-forward="true" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
           <folding>
-            <element signature="e#24#46#0" expanded="true" />
-            <marker date="1495591638641" expanded="true" signature="1439:1573" ph="SELECT targe... targetpaper" />
-            <marker date="1495591638641" expanded="true" signature="1439:1601" ph="SELECT targe... targetpaper" />
-            <marker date="1495591638641" expanded="true" signature="1439:1664" ph="SELECT targe... targetpaper" />
+            <marker date="1500798393770" expanded="true" signature="1513:1649" ph="SELECT targe... targetpaper" />
+            <marker date="1500798393770" expanded="true" signature="1513:1650" ph="SELECT targe... targetpaper" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/paperScrapy/tools/dbhelper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="65" column="44" lean-forward="true" selection-start-line="64" selection-start-column="8" selection-end-line="65" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/paperScrapy/tools/Crawl_proxy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1285">
+          <caret line="199" column="48" lean-forward="true" selection-start-line="199" selection-start-column="48" selection-end-line="199" selection-end-column="48" />
+          <folding>
+            <marker date="1495712664965" expanded="true" signature="11536:11568" ph="select proxi... proxies" />
+            <marker date="1495712664965" expanded="true" signature="11952:12034" ph="INSERT INTO proxies... " />
+            <marker date="1495712664965" expanded="true" signature="12256:12288" ph="select proxi... proxies" />
+            <marker date="1495712664965" expanded="true" signature="12591:12623" ph="select proxi... proxies" />
+            <marker date="1495712664965" expanded="true" signature="12860:12903" ph="delete from " />
           </folding>
         </state>
       </provider>
@@ -970,7 +973,84 @@
           <caret line="14" column="9" lean-forward="true" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
           <folding>
             <element signature="e#33#42#0" expanded="true" />
-            <marker date="1495591677977" expanded="true" signature="534:666" ph="SELECT targe... targetpaper" />
+            <marker date="1500798393726" expanded="true" signature="536:668" ph="SELECT targe... targetpaper" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/paperScrapy/tools/mysqlpool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="139" column="15" lean-forward="false" selection-start-line="139" selection-start-column="8" selection-end-line="139" selection-end-column="15" />
+          <folding>
+            <element signature="e#198#212#0" expanded="true" />
+            <marker date="1493210799243" expanded="true" signature="5247:5373" ph="SELECT CCF_i... ccf" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/paperScrapy/middlewares.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="64" column="8" lean-forward="false" selection-start-line="64" selection-start-column="8" selection-end-line="64" selection-end-column="8" />
+          <folding>
+            <element signature="e#167#176#0" expanded="true" />
+            <marker date="1500878473648" expanded="true" signature="6848:6931" ph="select proxi... proxies" />
+            <marker date="1500878473648" expanded="true" signature="7442:7526" ph="select proxi... proxies" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_jour.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="43" column="66" lean-forward="true" selection-start-line="43" selection-start-column="50" selection-end-line="43" selection-end-column="66" />
+          <folding>
+            <marker date="1500727776716" expanded="true" signature="1322:1445" ph="SELECT CCF_i... ccf" />
+            <marker date="1500727776716" expanded="true" signature="1583:1712" ph="SELECT CORE_... core" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/paperScrapy/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="40" column="0" lean-forward="true" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/paperScrapy/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="63" column="39" lean-forward="true" selection-start-line="63" selection-start-column="39" selection-end-line="63" selection-end-column="39" />
+          <folding>
+            <marker date="1500883943554" expanded="true" signature="928:1192" ph="UPDATE paper... " />
+            <marker date="1500883943554" expanded="true" signature="1906:2028" ph="SELECT count... ccf" />
+            <marker date="1500883943554" expanded="true" signature="2053:2180" ph="SELECT count... core" />
+            <marker date="1500883943554" expanded="true" signature="2842:2946" ph="SELECT CCF_d... ccf" />
+            <marker date="1500883943554" expanded="true" signature="3441:3492" ph="update ccf s... " />
+            <marker date="1500883943554" expanded="true" signature="3532:3583" ph="update ccf s... " />
+            <marker date="1500883943554" expanded="true" signature="3602:3652" ph="update ccf s... " />
+            <marker date="1500883943554" expanded="true" signature="4146:4255" ph="SELECT CORE_... core" />
+            <marker date="1500883943554" expanded="true" signature="4645:4698" ph="update core " />
+            <marker date="1500883943554" expanded="true" signature="4761:4815" ph="update core " />
+            <marker date="1500883943554" expanded="true" signature="4855:4909" ph="update core " />
+            <marker date="1500883943554" expanded="true" signature="4928:4981" ph="update core " />
+            <marker date="1500883943554" expanded="true" signature="5606:5745" ph="update targe... " />
+            <marker date="1500883943554" expanded="true" signature="5841:5946" ph="update targe... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/paperScrapy/spiders/dblpSpider_conf.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="803">
+          <caret line="81" column="48" lean-forward="false" selection-start-line="81" selection-start-column="48" selection-end-line="81" selection-end-column="48" />
+          <folding>
+            <element signature="e#24#46#0" expanded="true" />
+            <marker date="1500883707100" expanded="true" signature="1333:1477" ph="SELECT CCF_i... ccf" />
+            <marker date="1500883707100" expanded="true" signature="1615:1766" ph="SELECT CORE_... core" />
           </folding>
         </state>
       </provider>

@@ -20,12 +20,12 @@ NEWSPIDER_MODULE = 'paperScrapy.spiders'
 #USER_AGENT = 'paperScrapy (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-# ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = True
 
 
 # Mysql数据库的配置信息
 MYSQL_HOST = '192.168.1.198'
-MYSQL_DBNAME = 'citation_raw_qian'           # 数据库名字，请修改
+MYSQL_DBNAME = 'aminer_gai'           # 数据库名字，请修改
 MYSQL_USER = 'jingshuai'            # 数据库账号，请修改
 MYSQL_PASSWD = '123456'             # 数据库密码，请修改
 
@@ -35,7 +35,7 @@ MYSQL_PORT = 3306                   # 数据库端口，在dbhelper中使用
 ROBOTSTXT_OBEY = False
 
 # 下载延迟反被封锁ip
-CONCURRENT_REQUESTS = 10
+CONCURRENT_REQUESTS = 15
 # CONCURRENT_REQUESTS_PER_DOMAIN = 2
 DOWNLOAD_DELAY = 1
 
@@ -47,10 +47,10 @@ COOKIES_ENABLED = False
 # AUTOTHROTTLE_START_DELAY = 1
 
 
-# # 配置代理
+# 配置代理
 DOWNLOADER_MIDDLEWARES = {
  'scrapy.contrib.downloadermiddleware.httpproxy.HttpProxyMiddleware': 110,
- 'paperScrapy.middlewares.ProxyMiddleware': 400,
+ 'paperScrapy.middlewares.ProxyMiddleware': 100,
 }
 
 

@@ -10,7 +10,7 @@ from paperScrapy.tools.mysqlpool import MysqlPool
 
 class DblpSpider(scrapy.Spider):
 
-    name = "dblpSpider"
+    name = "dblpSpider_jour"
 
     # 使用对应的pipline存储类
     custom_settings = {
@@ -19,21 +19,21 @@ class DblpSpider(scrapy.Spider):
         }
     }
 
-    # headers = {
-    #     'Host': 'dblp.uni-trier.de',
-    #     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
-    #     'Accept': 'text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01',
-    #     'Accept-Language': 'zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4',
-    #     'Accept-Encoding': 'gzip, deflate, sdch',
-    #     'Referer': 'http://dblp.uni-trier.de/',
-    #     'Cookie': 'dblp-hideable-show-feeds=true; dblp-hideable-show-rawdata=true; dblp-view=y; dblp-search-mode=c',
-    #     'Connection': 'keep-alive',
-    #     'Cache-Control': 'max-age=0',
-    # }
-
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36',
+        'Host': 'dblp.uni-trier.de',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36',
+        'Accept': 'text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01',
+        'Accept-Language': 'zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4',
+        'Accept-Encoding': 'gzip, deflate, sdch',
+        'Referer': 'http://dblp.uni-trier.de/',
+        'Cookie': 'dblp-hideable-show-feeds=true; dblp-hideable-show-rawdata=true; dblp-view=y; dblp-search-mode=c',
+        'Connection': 'keep-alive',
+        'Cache-Control': 'max-age=0',
     }
+
+    # headers = {
+    #     'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36',
+    # }
 
     mypool = MysqlPool()  # 创建连接池
 
@@ -51,21 +51,6 @@ class DblpSpider(scrapy.Spider):
 
     # 获取初始request
     def start_requests(self):
-
-        # # 更新会议
-        # conference_select = "SELECT CCF_id, CCF_abbreviation " \
-        #              "FROM ccf WHERE CCF_id<10000000 AND CCF_dblpname = %s and CCF_type = 'conference'"
-        #
-        # conference_set = self.mypool.getAll(conference_select, ("NOT IN DBLP",))  # 记录所有待查询的venue集合
-        # for con in conference_set:
-        #
-        #     con_id = con["CCF_id"]
-        #     con_abb= con["CCF_abbreviation"]
-        #     update_sql = "update ccf set CCF_dblpname = %s where CCF_id = %s "
-        #     self.mypool.update(update_sql, (con_abb, con_id))
-        # self.mypool.end()
-        # print 'Conference is updated successful!'
-        #
 
 
         # for i in range(len(self.ccf_venue_set)):
@@ -102,7 +87,6 @@ class DblpSpider(scrapy.Spider):
     def parse(self, response):
         item = PaperscrapyItem()    # 声明自己定义的item类
         yield item
-
 
 
     def parse_venue(self, response):

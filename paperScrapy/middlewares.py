@@ -61,7 +61,7 @@ class ProxyMiddleware(object):
         else:
             # print '---------find in mysql---------'
             proxy = self.get_random_proxy_http()
-        print "this is request ip:" + proxy
+        # print "this is request ip:" + proxy
         request.meta['proxy'] = proxy
 
         # 这句话用于随机选择user-agent
@@ -109,8 +109,11 @@ class ProxyMiddleware(object):
                 proxy = self.get_random_proxy_https()
             else:
                 proxy = self.get_random_proxy_http()
+
+            # proxy = 'https://59.44.16.7:8080'   # 利用本地
             print("this is response ip:" + proxy)
             # 对当前reque加上代理
+            # request.meta['proxy'] = 'https://59.44.16.7:8080'
             request.meta['proxy'] = proxy
             return request
 
@@ -151,10 +154,12 @@ class ProxyMiddleware(object):
         dbpool = MysqlPool()
         select_sql = "select proxies_link from proxies where proxies_status = 1 and proxies_type = 'http'"
         results = dbpool.getAll(select_sql)
-        while len(results) == 0:
-            print '!!!!!!!!!!!数据库空!!!!!!!!!'
-            time.sleep(500)
-            results = dbpool.getAll(select_sql)
+        if not results:
+            print '!!!!!!!!!!!代理数据库空!!!!!!!!!'
+            time.sleep(100)
+            return 0
+            # dbpool = MysqlPool()
+            # results = dbpool.getAll(select_sql)
         # print '---------the results num is---------', len(results)
         res = random.choice(results)
         return res['proxies_link']
@@ -164,10 +169,12 @@ class ProxyMiddleware(object):
         dbpool = MysqlPool()
         select_sql = "select proxies_link from proxies where proxies_status = 1 and proxies_type = 'https'"
         results = dbpool.getAll(select_sql)
-        while not results:
-            print '!!!!!!!!!!!数据库空!!!!!!!!!'
-            time.sleep(500)
-            results = dbpool.getAll(select_sql)
+        if not results:
+            print '!!!!!!!!!!!代理数据库空!!!!!!!!!'
+            time.sleep(100)
+            return 0
+            # dbpool = MysqlPool()
+            # results = dbpool.getAll(select_sql)
         res = random.choice(results)
         return res['proxies_link']
 

@@ -51,7 +51,14 @@ class DblpPipeline(object):
     '''
 
     dbpool = MysqlPool()
+    ccf_sql_select = "SELECT count(*) " \
+                     "FROM ccf WHERE CCF_id<10000000 AND CCF_dblpname = %s and CCF_type = 'conference'"
+    core_sql_select = "SELECT count(*) " \
+                      "FROM core WHERE CORE_id<10000000 AND CORE_dblpname = %s and CORE_type = 'conference'"
 
+    num = dbpool.getOne(core_sql_select, ('NOT IN DBLP',))
+    num = num['count(*)']
+    print 'num is ', num
     # pipeline默认调用
     def process_item(self, item, spider):
         venue_type = item["venue_type"]
@@ -75,26 +82,29 @@ class DblpPipeline(object):
         venue_id = item["venue_id"]
 
         # 查询当前对应venue_id对应的dblp 名称
-        select_sql = "SELECT CCF_dblpname, CCF_dblpname2, CCF_dblpname3 " \
-                     "FROM ccf WHERE CCF_id = %s"
-        dblp_ans = self.dbpool.getAll(select_sql, (venue_id,))
-        dblp_ans = dblp_ans[0]
-        ccf_dblpname1 = dblp_ans["CCF_dblpname"]
-        ccf_dblpname2 = dblp_ans["CCF_dblpname2"]
-        ccf_dblpname3 = dblp_ans["CCF_dblpname3"]
+        # select_sql = "SELECT CCF_dblpname, CCF_dblpname2, CCF_dblpname3 " \
+        #              "FROM ccf WHERE CCF_id = %s"
+        # dblp_ans = self.dbpool.getAll(select_sql, (venue_id,))
+        # dblp_ans = dblp_ans[0]
+        # ccf_dblpname1 = dblp_ans["CCF_dblpname"]
+        # ccf_dblpname2 = dblp_ans["CCF_dblpname2"]
+        # ccf_dblpname3 = dblp_ans["CCF_dblpname3"]
         print 'save to sql:', dblp_name
         # 按顺序先更新前面的名称
-        if ccf_dblpname1 == "NOT IN DBLP":
-            sql = "update ccf set CCF_dblpname = %s where CCF_id = %s "
-        elif ccf_dblpname2 is None:
-            sql = "update ccf set CCF_dblpname2 = %s where CCF_id = %s "
-        else:
-            sql = "update ccf set CCF_dblpname3 = %s where CCF_id = %s "
+        # if ccf_dblpname1 == "NOT IN DBLP":
+        #     sql = "update ccf set CCF_dblpname = %s where CCF_id = %s "
+        # elif ccf_dblpname2 is None:
+        #     sql = "update ccf set CCF_dblpname2 = %s where CCF_id = %s "
+        # else:
+        #     sql = "update ccf set CCF_dblpname3 = %s where CCF_id = %s "
 
+        sql = "update ccf set CCF_dblpname = %s where CCF_id = %s "
         self.dbpool.update(sql, (dblp_name, venue_id))
 
         self.dbpool.end()
         print venue_id, 'ccf is updated successful!'
+        self.num -= 1
+        print '---------- left ', self.num,'---------'
 
     def core_dblp(self, item):
         """
@@ -107,26 +117,29 @@ class DblpPipeline(object):
         venue_id = item["venue_id"]
 
         # 查询当前对应venue_id对应的dblp 名称
-        select_sql = "SELECT CORE_dblpname, CORE_dblpname2, CORE_dblpname3 " \
-                     "FROM core WHERE CORE_id = %s"
-        dblp_ans = self.dbpool.getAll(select_sql, (venue_id,))
-        dblp_ans = dblp_ans[0]
-        core_dblpname1 = dblp_ans["CORE_dblpname"]
-        core_dblpname2 = dblp_ans["CORE_dblpname2"]
-        core_dblpname3 = dblp_ans["CORE_dblpname3"]
+        # select_sql = "SELECT CORE_dblpname, CORE_dblpname2, CORE_dblpname3 " \
+        #              "FROM core WHERE CORE_id = %s"
+        # dblp_ans = self.dbpool.getAll(select_sql, (venue_id,))
+        # dblp_ans = dblp_ans[0]
+        # core_dblpname1 = dblp_ans["CORE_dblpname"]
+        # core_dblpname2 = dblp_ans["CORE_dblpname2"]
+        # core_dblpname3 = dblp_ans["CORE_dblpname3"]
         print 'save to sql:', dblp_name
         # 按顺序先更新前面的名称
-        if core_dblpname1 == "NOT IN DBLP":
-            sql = "update core set CORE_dblpname = %s where CORE_id = %s "
-        elif core_dblpname2 is None:
-            sql = "update core set CORE_dblpname2 = %s where CORE_id = %s "
-        else:
-            sql = "update core set CORE_dblpname3 = %s where CORE_id = %s "
+        # if core_dblpname1 == "NOT IN DBLP":
+        #     sql = "update core set CORE_dblpname = %s where CORE_id = %s "
+        # elif core_dblpname2 is None:
+        #     sql = "update core set CORE_dblpname2 = %s where CORE_id = %s "
+        # else:
+        #     sql = "update core set CORE_dblpname3 = %s where CORE_id = %s "
 
+        sql = "update core set CORE_dblpname = %s where CORE_id = %s "
         self.dbpool.update(sql, (dblp_name, venue_id))
 
         self.dbpool.end()
         print venue_id, ' core is updated successful!'
+        self.num -= 1
+        print '---------- left ', self.num, '---------'
 
 
 class DblpPaperPipeline(object):

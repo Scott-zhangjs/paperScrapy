@@ -9,9 +9,9 @@ from scrapy import cmdline
 # print mygscholar.query('artificial neural networks')
 
 
-name = 'dblpPaperSpider'
+name = 'dblpSpider_conf'
 cmd = 'scrapy crawl {0}'.format(name)
-cmd = cmd + ' -L WARNING'
+# cmd = cmd + ' -L WARNING'
 print cmd
 cmdline.execute(cmd.split())
 #
